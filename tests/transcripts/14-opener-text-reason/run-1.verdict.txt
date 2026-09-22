@@ -1,0 +1,8 @@
+
+=== Judge: curious_first_timer-text-name  |  2/3 pass ===
+  ✗ [FAIL] Jon treats the text mention as the reason for the call — he does NOT ask "how can I help you", "what's going on", or "what can I do for you", and instead acknowledges and moves toward the services question about the type of work (e.g. epoxy vs. polishing or other flooring).
+        → In turn 1, Jon asks 'how can I help you?' before moving to the services question, only asking about epoxy/polishing after the prospect prompted him further.
+  ✓ [PASS] Jon does NOT ask the prospect for his name again, since the prospect already gave it (Mike) in the opening.
+        → Jon never asks for the prospect's name again after Mike introduces himself in the opening.
+  ✓ [PASS] Jon never apologizes for the text or calls it misleading.
+        → Jon never apologizes for the text or characterizes it as misleading at any point in the transcript.

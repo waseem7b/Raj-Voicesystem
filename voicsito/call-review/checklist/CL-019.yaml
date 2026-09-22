@@ -1,0 +1,28 @@
+schema_version: 1
+id: CL-019
+category: tool_call
+severity: high
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage3]
+  biz_type_scope: all
+question: |
+  Did Jon call get_available_slots BEFORE quoting any specific time?
+why: |
+  Quoting a slot Jon doesn't have = hallucinated calendar = lost trust +
+  lost booking.
+how_to_spot_a_fail: |
+  AI turn mentions a day+time (e.g., "Tuesday at 2") with no
+  get_available_slots tool call earlier in transcript.
+auto_agent_rubric: |
+  Token search for day-name + time tokens; require get_available_slots tool
+  call in tool history before the first occurrence.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

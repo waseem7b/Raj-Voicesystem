@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Opener re-render — audition</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: -apple-system, "Segoe UI", sans-serif; margin: 32px; max-width: 720px; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { color: #666; font-size: 13px; margin-bottom: 20px; }
+  .line { font-size: 15px; margin: 12px 0 18px; padding: 8px 12px; background: rgba(0,0,0,.05); border-radius: 6px; }
+  .row { border: 1px solid #ccc; border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+  .row h2 { font-size: 14px; margin: 0 0 8px; }
+  .tag { font-family: ui-monospace, monospace; font-size: 12px; color: #888; }
+  .old { opacity: .85; border-style: dashed; }
+  audio { width: 100%; margin-top: 4px; }
+  code { font-size: 12px; }
+</style>
+</head>
+<body>
+<h1>Opener re-render — audition</h1>
+<div class="sub">Pick the best-sounding NEW take, then tell Claude the number to deploy.</div>
+
+<div class="line">Spoken line (unchanged): <strong>&ldquo;Hey, Jon here &mdash; who is this calling?&rdquo;</strong></div>
+
+<div class="sub">New config (pulled live from Vapi):
+  voice <code>UNCsznDbk5vRePab5lcd</code> &middot; <code>eleven_turbo_v2_5</code> &middot;
+  stability 0.30 &middot; similarity 1.00 &middot; style 1.00 &middot; speed 1.00 &middot; speaker-boost on
+</div>
+
+<div class="row"><h2>Take 1 <span class="tag">take1.mp3</span></h2>
+  <audio controls preload="metadata" src="take1.mp3"></audio></div>
+<div class="row"><h2>Take 2 <span class="tag">take2.mp3</span></h2>
+  <audio controls preload="metadata" src="take2.mp3"></audio></div>
+<div class="row"><h2>Take 3 <span class="tag">take3.mp3</span></h2>
+  <audio controls preload="metadata" src="take3.mp3"></audio></div>
+
+<div class="row old"><h2>Current LIVE opener (old voice, for comparison) <span class="tag">?v=20260512-122624</span></h2>
+  <audio controls preload="none"
+    src="https://webhooks.c7a.io/voicsito/static/firstmessage-opener.mp3?v=20260512-122624"></audio>
+  <div class="sub" style="margin-top:8px">Rendered 2026-05-12 on the old Michael voice (<code>ljX1ZrXuDIIRVcmiVSyR</code>) &mdash; this is the mismatch we're replacing.</div>
+</div>
+
+</body>
+</html>

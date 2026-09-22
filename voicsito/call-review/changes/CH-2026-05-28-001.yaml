@@ -1,0 +1,57 @@
+schema_version: 1
+id: CH-2026-05-28-001
+created: 2026-05-28T00:00
+session: 2026-05-28-opener-text-ack
+driven_by:
+  observations: []
+  checklist_items: [CL-005]
+prompt_file: src/agent/prompts/stage1_inbound_texts.py
+stage: stage1
+section: "Step 1 — Opening (anchor acknowledgment branch)"
+prompt_file_sha256_before: "42935422479f5c9e317debce6667f823acba84189d3171517df11f42acc15f17"
+prompt_file_sha256_after: "b00078c7d62e9502da595b84ebf1c891613d5d6fa23b4129835b131bc4af7809"
+escape_reason: ""
+hypothesis: |
+  When the prospect names the text/message as their reason for calling,
+  "appreciate you calling" undersells the context — we initiated contact,
+  so they're returning our outreach, not cold-calling us. Acknowledging
+  with "thanks for getting back to me" mirrors the real dynamic and reads
+  warmer / more "with it" on the first agent turn. Scoped strictly to
+  text-mention cases; every other opener keeps the standard
+  "appreciate you calling" acknowledgment.
+expected_outcome:
+  metric: stage1_to_stage2_handoff_rate
+  direction: up
+  magnitude: small
+  verify_after_n_calls: 10
+before: |
+  **Anchor:** "Yeah, appreciate you calling [first name if known]. I'm just
+  driving right now so I might cut out here and there."
+
+  **Then continue, same utterance, with the follow-up that matches the prospect's first response:**
+after: |
+  **Anchor — default to the standard acknowledgment; swap only on a spoken text reference:**
+
+  - Default (use this unless the exception below is met): "Yeah, appreciate you calling [first name if known]. I'm just driving right now so I might cut out here and there."
+  - Exception — only when the prospect's OWN WORDS this turn mention the text or message we sent (e.g. "you texted me", "I got your text", "the message about jobs"): "Yeah, thanks for getting back to me [first name if known]. I'm just driving right now so I might cut out here and there."
+
+  The background fact that we texted this prospect is NOT the trigger — every caller was texted. Use "thanks for getting back to me" only when they themselves bring up the text out loud. If they do not say anything about a text, use the default.
+
+  **Then continue, same utterance, with the follow-up that matches the prospect's first response:**
+word_changes_attempted: true
+deployed: true
+deployed_at: 2026-05-28T16:55:00Z
+reference_point: docs/reference-points/2026-05-28-opener-text-ack/
+verify_by: |
+  Pull next 10 inbound Stage 1 calls. For each, check transcript:
+  1. When prospect referenced the text/message in their first utterance,
+     Jon's opener acknowledges with "thanks for getting back to me"
+     (not "appreciate you calling").
+  2. When prospect did NOT mention the text, the opener still uses
+     "appreciate you calling".
+  3. No double-acknowledgment (opener does not stack both phrases).
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

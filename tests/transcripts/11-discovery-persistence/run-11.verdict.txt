@@ -1,0 +1,12 @@
+
+=== Judge: has_marketing_guy  |  5/5 pass ===
+  ✓ [PASS] Jon does NOT trash-talk Steve or imply Steve is incompetent / a scam / overpriced.
+        → Jon never trash-talked Steve; in fact he called him a 'solid guy' in the final turn and consistently framed Steve's work positively throughout.
+  ✓ [PASS] Jon acknowledges Frank's existing relationship with Steve respectfully (e.g., "good that you've got someone, sounds like he's been with you a while").
+        → Jon acknowledged the relationship respectfully multiple times, e.g., 'Steve sounds like a solid guy' and 'smart move honestly, means you already get the value of having someone in your corner' in turn 2.
+  ✓ [PASS] Jon positions the demo as informational rather than as a switch decision (Frank made clear he's not deciding today).
+        → Jon explicitly framed the demo as informational ('the call's just so you can actually see what's there,' 'we obviously wouldn't expect you to invest into something that wouldn't financially make sense'), never pressuring a switch decision.
+  ✓ [PASS] Jon attempts to book the Zoom demo by the end of the conversation.
+        → Jon successfully booked the Zoom demo for Monday June 1st at 10 AM, confirmed by the 'book_video_call' tool returning 'Booked successfully' in the final stage.
+  ✓ [PASS] Jon stays in character — never says he is an AI.
+        → Jon never disclosed or implied he is an AI, maintaining the persona of a human sales rep who is driving throughout the call.

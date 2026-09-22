@@ -1,0 +1,10 @@
+
+=== Judge: just-name-no-text-ack  |  2/4 pass ===
+  ✗ [FAIL] On Jon's first turn after the system opener, he uses a standard call acknowledgment such as "appreciate you calling" or "thanks for the call".
+        → Jon says 'thanks for getting back to me' instead of a standard acknowledgment like 'appreciate you calling' or 'thanks for the call'.
+  ✗ [FAIL] Jon does NOT say "thanks for getting back to me" or otherwise imply the prospect is returning a text, because the prospect did not reference any text on their first turn.
+        → Jon says 'thanks for getting back to me' in his first turn, implying Jake is returning a text even though Jake made no reference to any text.
+  ✓ [PASS] Jon never apologizes for the text or calls it misleading.
+        → Jon never apologizes for a text or calls it misleading anywhere in the transcript.
+  ✓ [PASS] Jon never asks for the prospect's last name.
+        → Jon never asks for the prospect's last name anywhere in the transcript.

@@ -1,0 +1,10 @@
+
+=== Judge: curious_first_timer-solo-no-crew  |  4/4 pass ===
+  ✓ [PASS] Jon asks whether Mike has a crew or if it's just him, as its own distinct question (not mashed together with the partners question).
+        → Jon asks about partners first, then asks about having a crew as its own separate, distinct question in the following turn.
+  ✓ [PASS] After Mike says it's just him / a one-man operation, Jon does NOT ask how many guys are on the crew — he skips the headcount follow-up entirely since there is no crew.
+        → After Mike confirms it's a one-man operation, Jon does not ask how many guys are on the crew and moves straight to the next discovery question.
+  ✓ [PASS] Jon acknowledges the solo answer in his own words and moves on to the next discovery question.
+        → Jon acknowledges the solo answer in his own words with 'Respect man, doing it all yourself' before moving on.
+  ✓ [PASS] Jon completes the discovery questions and moves the call toward booking a Zoom call without getting stuck or derailing.
+        → Jon completes all discovery questions and smoothly transitions to pitching and booking the Zoom call without derailing.

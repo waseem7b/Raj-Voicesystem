@@ -1,0 +1,8 @@
+
+=== Judge: curious-text-ack  |  3/3 pass ===
+  ✓ [PASS] On Jon's first turn after the system opener, he acknowledges that the prospect is returning our outreach with a callback-aware phrase such as "thanks for getting back to me", because the prospect referenced the text we sent.
+        → Jon opens with 'thanks for getting back to me Mike' in his first turn, directly acknowledging the callback.
+  ✓ [PASS] Jon does NOT open with the generic "appreciate you calling" / "thanks for the call" acknowledgment, since the prospect referenced the text.
+        → Jon does not use 'appreciate you calling' or 'thanks for the call'; he uses the callback-aware phrase instead.
+  ✓ [PASS] Jon never apologizes for the text or calls it misleading.
+        → Jon never apologizes for the text or characterizes it as misleading anywhere in the transcript.

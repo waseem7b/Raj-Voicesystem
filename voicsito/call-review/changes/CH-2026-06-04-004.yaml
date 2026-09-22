@@ -1,0 +1,68 @@
+schema_version: 1
+id: CH-2026-06-04-004
+created: 2026-06-04T00:00
+session: 2026-06-04-opener-text-reason-vs-business
+driven_by:
+  observations: []
+  checklist_items: [CL-030]
+prompt_file: src/agent/prompts/stage1_inbound_texts.py
+stage: stage1
+section: "Step 1 — Opening (follow-up table: exclude text mention from the 'how can I help' branch)"
+prompt_file_sha256_before: "b865350e5fe330b80326a05e082e7cd169b2174c553b0ca267c608cdf51a64d3"
+prompt_file_sha256_after: "d68c8bb3fbd15fde523cafee5893e8bb6907b1b2fd365eb736f20ee6b55be786"
+escape_reason: ""
+hypothesis: |
+  Follow-up to CH-2026-06-04-002. A 3-run sim (one-shot
+  curious_first_timer-text-name, opener "Yeah, I got your text — it's Mike")
+  showed Jon re-asks "how can I help you?" on 3/3 runs when the prospect gives
+  their NAME and a TEXT MENTION in the same opening utterance. Root cause: the
+  follow-up table branch "Name only, or name + business, but no reason given ->
+  how can I help you" overlaps with "Name AND a reason (text...) -> advance"
+  when the model does not register the text as the reason; with a name present
+  it falls into the "how can I help" branch. The clarifying bullet from
+  CH-2026-06-04-002 stated the concept but did not disambiguate the branch the
+  model actually selects.
+  Fix: add "and no text mention" to the "how can I help" branch condition so a
+  name + text utterance no longer matches it and instead routes to the
+  "reason -> advance" branch. Condition-only edit (the cond of a branch, not
+  any spoken wording) — no anchor words changed. Resolves the ambiguity at the
+  branch (prompt-update-discipline principle 1: exception baked into the rule).
+  Expected: text+name opener advances to Step 2 with no "how can I help"; the
+  text-no-name case (asks name once) and the bare-business-name case (asks how
+  can I help) are unaffected, since neither matches the new exclusion.
+expected_outcome:
+  metric: opener_text_plus_name_rereask_rate
+  direction: down
+  magnitude: large
+  verify_after_n_calls: 5
+before: |
+  - Name only, or name + business, but no reason given -> append "...so how can
+    I help you?" to surface why they called
+after: |
+  - Name only, or name + business, but no reason and no text mention given ->
+    append "...so how can I help you?" to surface why they called
+word_changes_attempted: false
+deployed: true
+deployed_at: 2026-06-09T18:25
+reference_point: docs/reference-points/2026-06-09-opener-business-advance-driving-harden/
+verify_by: |
+  Re-run the three CL-030 one-shots in tests/transcripts/14-opener-text-reason
+  (text-name, text-no-name, business-name), plus 2 extra text-name runs for
+  consistency:
+  1. text-name ("Yeah, I got your text — it's Mike") -> Jon advances to the
+     Step 2 services question with NO "how can I help you" (was 0/3, target 3/3).
+  2. text-no-name ("Yeah, I got your text") -> Jon asks the name once, then
+     advances; no reason re-ask (stays PASS).
+  3. business-name ("This is Mike from ABC Epoxy") -> Jon still asks how he can
+     help before Step 2 (stays PASS).
+verified:
+  ran: true
+  pass_count: 5
+  fail_count: 0
+  conclusion: |
+    Local sim only (folder tests/transcripts/14-opener-text-reason, runs 6-10);
+    NOT pushed to Vapi. Post-fix: text-name 3/3 on each of 3 runs (runs 6,7,8) —
+    was 0/3 pre-fix (runs 1,4,5); text-no-name 3/3 (run 9); business-name 2/2
+    (run 10). Confirmed by transcript read (run-6): on "I got your text — it's
+    Mike", Jon acknowledges and stops (no "how can I help"), then advances to the
+    Step 2 services question. Driving caveat still fires once (CL-028 intact).

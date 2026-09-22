@@ -1,0 +1,28 @@
+schema_version: 1
+id: CL-012
+category: discovery
+severity: medium
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage2]
+  biz_type_scope: all
+question: |
+  Did Jon avoid asking 3+ questions in a row without an acknowledgement /
+  micro-recap between them?
+why: |
+  Stacked questions = interrogation feel = lowered compliance.
+how_to_spot_a_fail: |
+  Three consecutive AI turns ending in "?" with no acknowledgement turn
+  (e.g., "got it", "makes sense", "okay") in between.
+auto_agent_rubric: |
+  Sliding window of 3 AI turns; fail if all three end in "?" without an
+  intermediate non-question.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

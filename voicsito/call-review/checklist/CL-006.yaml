@@ -1,0 +1,30 @@
+schema_version: 1
+id: CL-006
+category: reveal
+severity: critical
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage1]
+  biz_type_scope: all
+question: |
+  Did the reveal land cleanly — Stage 2 handoff fired and the prospect did
+  NOT hang up during/immediately after?
+why: |
+  Reveal is the highest-risk moment in the call. Handoff failure here is a
+  system-level miss.
+how_to_spot_a_fail: |
+  endedReason="customer-ended-call" within 60s of the reveal line; OR
+  handoff to Stage 2 never fired.
+auto_agent_rubric: |
+  Cross-reference call ended_reason with timestamp of "transferToAssistant"
+  event. Fail if hang-up within 60s of reveal completion and no Stage 2
+  handoff.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

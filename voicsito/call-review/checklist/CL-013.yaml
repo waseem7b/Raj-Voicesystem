@@ -1,0 +1,28 @@
+schema_version: 1
+id: CL-013
+category: objection
+severity: critical
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage2, stage3]
+  biz_type_scope: all
+question: |
+  Did Jon use "acknowledge + and" (never "but") when handling objections?
+why: |
+  "But" erases everything before it. Hormozi looping rule.
+how_to_spot_a_fail: |
+  AI turn that follows a prospect objection contains the word "but" early in
+  the response.
+auto_agent_rubric: |
+  For AI turns immediately after prospect objection phrases (regex on "no",
+  "not sure", "send me info", "have to think"), reject if AI response opens
+  with /\bbut\b/i in first 12 words.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

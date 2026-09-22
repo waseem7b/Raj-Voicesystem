@@ -1,0 +1,79 @@
+schema_version: 1
+id: CH-2026-05-28-003
+created: 2026-05-28T17:10
+session: 2026-05-28-opener-text-ack
+driven_by:
+  observations: []
+  checklist_items: [CL-005]
+prompt_file: src/agent/prompts/stage1_inbound_texts.py
+stage: stage1
+section: "Step 1 — Opening (anchor acknowledgment branch + follow-up table)"
+prompt_file_sha256_before: "19ab10b44e2434d0f920b8e0e08df817a1af188ac66445333b57c2fa2c23e476"
+prompt_file_sha256_after: "8e1a4993d3cb0882c11d4e4eccd7bfee92b93edabfb093719f07e4cc0289c9ba"
+escape_reason: ""
+hypothesis: |
+  A prospect who names their business ("this is Mike from ABC Epoxy") is
+  identifying as the contractor we reached out to, just as much as one who
+  says "you texted me" — both signal they're returning our outreach. So the
+  callback-aware "thanks for getting back to me" should fire on a spoken
+  business-name reference too, not only on a spoken text reference. Trigger
+  stays gated to the prospect's own words; the background fact that everyone
+  was texted is still NOT the trigger. Also reverts a concurrent table edit
+  that re-introduced "...so how can I help you?" for the name/name+business
+  case — that phrase is the robot tell CL-005 flags as a fail, and it
+  collided with the business-as-context decision (acknowledge + advance to
+  Step 2 instead of re-asking the reason).
+
+  UPDATE (operator override, 2026-05-28): the how-can-I-help revert above
+  was itself reversed by direct operator instruction. For the name-only
+  (no stated reason) case, Stage 1 now asks "...so how can I help you?" to
+  surface the reason. CL-005 was amended to allow this in the name-only
+  case while still flagging it when the prospect already referenced the
+  text/jobs/business. The business-name acknowledgment trigger (the
+  primary change in this record) stands unchanged.
+expected_outcome:
+  metric: stage1_to_stage2_handoff_rate
+  direction: up
+  magnitude: small
+  verify_after_n_calls: 10
+before: |
+  **Anchor — default to the standard acknowledgment; swap only on a spoken text reference:**
+
+  - Default: "Yeah, appreciate you calling [first name if known]. I'm just driving right now so I might cut out here and there."
+  - Exception — only when the prospect's OWN WORDS this turn mention the text or message we sent: "Yeah, thanks for getting back to me [first name if known]. I'm just driving right now so I might cut out here and there."
+
+  (closing) Use "thanks for getting back to me" only when they themselves bring up the text out loud.
+
+  Follow-up table row:
+  | Name only (or name + business), no reason given | Ask what they need — e.g. "...so how can I help you?" |
+after: |
+  **Anchor — default to the standard acknowledgment; swap when they reference the text or name their business:**
+
+  - Default: "Yeah, appreciate you calling [first name if known]. I'm just driving right now so I might cut out here and there."
+  - Exception — when the prospect's OWN WORDS this turn either (a) mention the text or message we sent, OR (b) name their business (e.g. "this is Mike from ABC Epoxy"): "Yeah, thanks for getting back to me [first name if known]. I'm just driving right now so I might cut out here and there."
+
+  (closing) Use "thanks for getting back to me" only when they themselves bring up the text or their business out loud. If they give just a name or a bare greeting with neither, use the default.
+
+  Follow-up table row (per operator override — see hypothesis UPDATE):
+  | Name only (or name + business), no reason given | Ask what they need — e.g. "...so how can I help you?" |
+word_changes_attempted: true
+deployed: true
+deployed_at: "2026-05-28T17:30"
+reference_point: ""
+verify_by: |
+  Pull next 10 inbound Stage 1 calls. For each, check transcript:
+  1. When prospect named their business (no text mention), Jon's opener uses
+     "thanks for getting back to me" (not "appreciate you calling").
+  2. When prospect referenced the text, opener still uses
+     "thanks for getting back to me".
+  3. When prospect gave only a bare name/greeting with neither text nor
+     business, opener uses "appreciate you calling".
+  4. When prospect gave only a name with no stated reason, Jon asks
+     "how can I help you?" (or equivalent) to surface the reason.
+  5. Jon does NOT ask "how can I help you?" once the prospect already
+     referenced the text/jobs or named their business.
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

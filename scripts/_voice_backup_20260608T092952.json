@@ -1,0 +1,24 @@
+{
+  "ad606c08-be2e-4f97-aaf1-8a182320515d": {
+    "model": "eleven_turbo_v2_5",
+    "speed": 0.92,
+    "style": 1,
+    "voiceId": "UNCsznDbk5vRePab5lcd",
+    "provider": "11labs",
+    "stability": 0.3,
+    "similarityBoost": 1,
+    "useSpeakerBoost": true,
+    "enableSsmlParsing": true
+  },
+  "5715972b-3067-4ab6-9aec-d86ce8f33bf4": {
+    "model": "eleven_turbo_v2_5",
+    "speed": 0.92,
+    "style": 1,
+    "voiceId": "UNCsznDbk5vRePab5lcd",
+    "provider": "11labs",
+    "stability": 0.3,
+    "similarityBoost": 1,
+    "useSpeakerBoost": true,
+    "enableSsmlParsing": true
+  }
+}

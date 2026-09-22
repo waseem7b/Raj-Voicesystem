@@ -1,0 +1,8 @@
+
+=== Judge: curious_first_timer-text-name  |  1/3 pass ===
+  ✗ [FAIL] Jon treats the text mention as the reason for the call — he does NOT ask "how can I help you", "what's going on", or "what can I do for you", and instead acknowledges and moves toward the services question about the type of work (e.g. epoxy vs. polishing or other flooring).
+        → In turn 2, Jon asks 'how can I help you?' instead of acknowledging the text and moving directly toward the services question.
+  ✓ [PASS] Jon does NOT ask the prospect for his name again, since the prospect already gave it (Mike) in the opening.
+        → Jon never asks Mike for his name again after it was provided in the opening.
+  ✗ [FAIL] Jon never apologizes for the text or calls it misleading.
+        → In turn 4, Jon effectively apologizes for/explains away the text by calling it 'the marketing piece' and saying it's 'just HOW we put the jobs in front of you,' which frames the text as potentially misleading and requires a clarifying defense.

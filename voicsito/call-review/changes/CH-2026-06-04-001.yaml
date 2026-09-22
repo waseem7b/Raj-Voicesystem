@@ -1,0 +1,70 @@
+schema_version: 1
+id: CH-2026-06-04-001
+created: 2026-06-04T00:00
+session: 2026-06-04-closing-stall-once
+driven_by:
+  observations: []
+  checklist_items: [CL-029]
+prompt_file: src/agent/prompts/stage3_book.py
+stage: stage3
+section: "Tools available — Silent tool use rule (stall-filler one-time scoping)"
+prompt_file_sha256_before: "edc94961b25e111bae887ab8e787d02753aa2cab2e928f703e8096c523a7d1a7"
+prompt_file_sha256_after: "eecab012ef4f34a04093c2cb42f9e5b91e051e9d2b9a507e9e6c9ff1ba03dc42"
+escape_reason: ""
+hypothesis: |
+  The "Give me a second, let me see what I have available." stall is baked
+  into the Step 2 calendar anchor as the verbal cover for get_available_slots
+  latency. With no rule scoping the stall to that one line, GPT-4.1 re-renders
+  "give me a second / give me a sec" on later booking turns (email capture,
+  booking confirmation, logistics) where the tool fires silently and there is
+  nothing to cover. Operator reports Jon "constantly" stalling after Step 2.
+  Same failure mode as the driving-caveat leak (CH-2026-05-31-001): a phrase
+  scoped to one step bleeding into every later step. Fix tightens the existing
+  "Silent tool use" rule to confine the stall to the Step 2 calendar line and
+  names the leaked variants as off-limits on Steps 4-7. Structural / scoping
+  only — the Step 2 anchor wording is unchanged.
+  Expected effect: the stall appears at most once per call (Step 2); the close
+  feels faster and less scripted from email capture onward.
+expected_outcome:
+  metric: closing_stall_repeat_rate
+  direction: down
+  magnitude: large
+  verify_after_n_calls: 10
+before: |
+  **Silent tool use:** Never say the words "function", "tool", or any tool
+  name. The only spoken lookup line is the Step 2 calendar line; every other
+  tool fires silently while you keep talking, and the natural pause covers the
+  latency.
+after: |
+  **Silent tool use:** Never say the words "function", "tool", or any tool
+  name. The only spoken lookup line is the Step 2 calendar line ("Give me a
+  second, let me see what I have available."); the "give me a second" stall
+  belongs to that line and nowhere else. On Step 4 (email), Step 5 (booking),
+  Step 6 (logistics), and Step 7 (sign off), the tool fires silently while you
+  keep talking — go straight to that step's line with no "give me a second",
+  "give me a sec", "hold on", or "one sec". The natural pause covers any
+  latency.
+word_changes_attempted: false
+deployed: true
+deployed_at: 2026-06-09T18:25
+reference_point: docs/reference-points/2026-06-09-opener-business-advance-driving-harden/
+verify_by: |
+  Run a multi-turn Stage 3 sim that reaches booking (or pull the next 10
+  inbound calls that reach Stage 3). For each transcript:
+  1. The stall ("give me a second / give me a sec / hold on / one sec") appears
+     in at most ONE AI turn — the Step 2 calendar pull.
+  2. The Step 4 (email), Step 5 (booking), Step 6 (logistics), and Step 7
+     (sign off) turns contain no stall filler.
+  3. The Step 2 calendar turn still delivers "Give me a second, let me see what
+     I have available." (the rule confines the stall, it does not delete it).
+verified:
+  ran: true
+  pass_count: 3
+  fail_count: 0
+  conclusion: |
+    Text sim — 3 full-funnel runs, curious_first_timer, 2026-06-04
+    (tests/transcripts/15-closing-stall/run-1..3). All three booked and
+    reached Stage 3. The "give me a second" stall appeared exactly once per
+    call — at the Step 2 calendar pull — and never during email capture,
+    booking, logistics, or sign-off; no other stall variant leaked. The Step 2
+    calendar line still delivered intact. Live-call verification still pending.

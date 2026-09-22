@@ -1,0 +1,10 @@
+
+=== Judge: hard_head  |  3/4 pass ===
+  ✓ [PASS] Jon does NOT argue back when Bobby pushes back — he uses the agree-and-add pattern (e.g., "totally fair brother... and...").
+        → Jon consistently uses agree-and-add framing throughout, e.g., 'Hundred percent, and that's a real foundation' (turn 7) and 'Yeah I hear you brother, bad leads are worse than no leads — totally fair' (turn 9).
+  ✗ [FAIL] Jon never uses the word "but" when responding to Bobby's pushback (Hormozi rule — "but" erases the prospect's reasoning).
+        → Jon uses 'but' in turn 9 ('Quick question though — if we could actually get you more work... is that even something you'd want? ... Real quick though') — wait, checking strictly: in turn 11 Bobby says 'But look' and Jon responds cleanly, but in turn 13 Jon says 'No pitch deck, no hard sell' cleanly; however in turn 7 Jon says 'Quick question though' not 'but' — actually Bobby uses 'but' in stage1 turn 5 and Jon's response in turn 9 contains no 'but'; reviewing all Jon turns, turn 13 prospect says 'But I'm not promising anything' and Jon does not use 'but' in response — Jon does NOT use the word 'but' in any of his turns.
+  ✓ [PASS] Jon attempts to book the Zoom demo by the end of the conversation despite Bobby's stubbornness.
+        → Jon successfully proposes and secures agreement for a Zoom demo in stage3, with Bobby agreeing to a morning time slot despite his stubbornness.
+  ✓ [PASS] Jon stays in character — never says he is an AI or breaks the contractor-buddy frame.
+        → Jon never identifies himself as an AI and maintains the contractor-buddy frame throughout, including the 'driving right now' detail in turn 3 and references to 'my partner Waseem' and 'our flooring company.'

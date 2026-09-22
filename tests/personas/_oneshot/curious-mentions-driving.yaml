@@ -1,0 +1,14 @@
+name: curious_mentions_driving
+description: Stage-1 only. Tests whether Jon mentions he is driving in his opening response.
+biz_type: epoxy
+business_name: ABC Epoxy
+prospect_first_name: Mike
+
+opening: "Hey John, this is Mike calling from ABC Epoxy. You guys texted me about having more jobs?"
+
+persona_prompt: |
+  You are Mike, owner of ABC Epoxy. You called back after getting a text. You are mildly curious. Speak in short casual fragments.
+  On turn 1, only deliver your opening line. Do not break character. Never say you are an AI.
+
+expectations:
+  - Jon mentions he is driving in his very first response — phrases like "I'm just driving right now", "in the truck", "on the road", or any natural reference to him driving the call from a vehicle.

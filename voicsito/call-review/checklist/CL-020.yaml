@@ -1,0 +1,28 @@
+schema_version: 1
+id: CL-020
+category: tool_call
+severity: medium
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage2]
+  biz_type_scope: all
+question: |
+  Was update_prospect_info called within 2 AI turns of receiving each
+  qualifying answer (services, marketing spend, employee count, etc.)?
+why: |
+  Late tool calls drop data when the call ends abruptly.
+how_to_spot_a_fail: |
+  Qualifying answer in prospect turn; update_prospect_info not called within
+  next 2 AI turns.
+auto_agent_rubric: |
+  Heuristic match on prospect turns containing entities (numbers, service
+  names); require update_prospect_info within 2 AI turns.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

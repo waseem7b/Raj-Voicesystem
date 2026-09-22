@@ -1,0 +1,59 @@
+schema_version: 1
+id: CL-033
+category: delivery
+severity: high
+status: provisional
+created: 2026-08-30
+created_from:
+  session: 2026-08-30-ashley-emdash-sentence-ends
+  driving_calls:
+    - 01a055ec-8629-711e-a784-7515286fe252
+    - 01a05608-f3c4-7115-ae01-70a3faf52a67
+applies_to:
+  stages: [demo_confirmation, demo_reminder]
+  biz_type_scope: all
+question: |
+  On an Ashley outbound call, did the audible beats land at SENTENCE
+  boundaries, and did every pause marker stay silent (never vocalised as a
+  word, never turned into an extra full stop)?
+why: |
+  The ` ————` marker previously sat immediately before a comma. That produced
+  the inverse of what the owner asked for: pauses appeared mid-clause while
+  consecutive sentences ran together with no beat between them. Two calls on
+  2026-08-30 show it clearly — 01a055ec delivered "Love that. I'm good. Thank
+  you. Just wanted to give you a quick reminder" as one unbroken segment while
+  breaking after "an hour before the" and "ready to go for you. So".
+  The marker was also still being vocalised at comma positions near a chunk
+  end: 01a055ec produced "Google Meet, like," and 01a05608 produced both
+  "download anything. Yeah." and "Google Meet. Like, okay." — neither word was
+  in the model output.
+  The markers have moved to the owner's chosen sentence-end positions (four em
+  dashes). Vapi splits chunks on `. ! ?`, so a marker after a full stop rides
+  the START of the next chunk rather than the end of the current one; only
+  chunk-END positions have been observed vocalising. That is the hypothesis
+  this item tests.
+how_to_spot_a_fail: |
+  FAIL A (vocalised marker): the assistant-channel transcript contains a word
+  the model never emitted at a marker position — "like", "yeah", a stray
+  letter or syllable. Compare against the raw `completionText` in the gzipped
+  call log; the sanitised `artifact.transcript` will not show this.
+  FAIL B (marker becomes punctuation): the marker position turns into an extra
+  full stop that was not in the model output ("anything. Yeah.").
+  FAIL C (blending persists): consecutive sentences that carry a marker between
+  them are delivered inside one continuous audio segment with no gap.
+  FAIL D (mid-sentence pause): an audible gap appears inside a clause where no
+  marker was written.
+auto_agent_rubric: |
+  Pull the gzipped call log. Extract the turn-3 `completionText` (raw, markers
+  intact) and every Deepgram `channel: assistant` final transcript in order.
+  - PASS if no marker position yields a word or full stop absent from the model
+    output, AND the assistant-channel segment boundaries fall at sentences that
+    carry a marker rather than mid-clause.
+  - FAIL on any of A-D above.
+  Note: Deepgram segment boundaries are an approximate proxy for audible gaps,
+  not a measurement. Confirm a borderline call by listening to the recording.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

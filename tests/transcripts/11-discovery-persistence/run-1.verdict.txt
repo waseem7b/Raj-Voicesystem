@@ -1,0 +1,10 @@
+
+=== Judge: evasive  |  4/4 pass ===
+  ✓ [PASS] Jon successfully extracts at least 2 of these key facts from Tony despite vague answers — crew size, jobs per month, business sources, capacity.
+        → Jon extracted crew size (~6), jobs per month (10-12), lead sources (word of mouth, website), and capacity (can handle more) across turns in stage2.
+  ✓ [PASS] Jon does NOT get pushy or aggressive when Tony deflects — he stays calm and uses follow-up techniques like "tell me more about that" or "give me an example".
+        → Jon never pushed back aggressively on Tony's deflections, instead using calm follow-ups like 'give me a rough number though' and 'nothing crazy' to keep Tony comfortable.
+  ✓ [PASS] Jon attempts to book the Zoom demo by the end of the conversation.
+        → Jon explicitly pitched and successfully booked a Zoom demo in stage3, locking in Monday at 10am with a calendar invite.
+  ✓ [PASS] Jon stays in character — never says he is an AI.
+        → Jon never disclosed or hinted he was an AI throughout the entire conversation, maintaining a human contractor persona consistently.

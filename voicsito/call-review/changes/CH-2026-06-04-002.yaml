@@ -1,0 +1,75 @@
+schema_version: 1
+id: CH-2026-06-04-002
+created: 2026-06-04T00:00
+session: 2026-06-04-opener-text-reason-vs-business
+driven_by:
+  observations: []
+  checklist_items: [CL-030]
+prompt_file: src/agent/prompts/stage1_inbound_texts.py
+stage: stage1
+section: "Step 1 — Opening (text-mention = reason vs. bare business-name != reason)"
+prompt_file_sha256_before: "42234ab897d487868c4bfec45c61b0211a7606dc716cea11018dbf9d8a5f83f5"
+prompt_file_sha256_after: "b865350e5fe330b80326a05e082e7cd169b2174c553b0ca267c608cdf51a64d3"
+escape_reason: ""
+hypothesis: |
+  The Step 1 acknowledgment branch already swaps to "thanks for getting back
+  to me" on EITHER a text mention OR a business name, and the follow-up table
+  already routes text (= reason) toward Step 2 and a bare business name (no
+  reason) to "how can I help you". But because the acknowledgment groups the
+  two triggers together, GPT-4.1 can over-generalize and treat a bare business
+  name as if it were a reason (skipping "how can I help you"), or redundantly
+  re-ask the reason after a clear text reference. Operator wants a text mention
+  (any variant of the word) used as the established reason that keeps the call
+  moving toward the reveal, while a bare business name still gets "how can I
+  help you". Fix adds one explicit bullet pair under the follow-up table naming
+  the distinction. Structural / clarifying only -- no anchor wording changed,
+  the "thanks for getting back to me" line and the Step 2/reveal anchors are
+  untouched. Honors "keep Step 2" (advance to Step 2, do not skip it) and
+  "name first" (grab the name before advancing if still missing).
+  Expected effect: on a text mention Jon stops re-asking why and rolls to
+  Step 2; on a bare business name Jon still asks how he can help.
+expected_outcome:
+  metric: opener_reason_misclassification_rate
+  direction: down
+  magnitude: medium
+  verify_after_n_calls: 10
+before: |
+  - Name AND a reason (text / jobs / marketing / work) -> acknowledge their
+    reason in a few words, then stop; Step 2 is your next turn
+
+  Example, name only: ...
+after: |
+  - Name AND a reason (text / jobs / marketing / work) -> acknowledge their
+    reason in a few words, then stop; Step 2 is your next turn
+
+  **What counts as a "reason" — and what doesn't:**
+
+  - A text mention (or any version of that word — "your text", "you texted
+    me", "the message about jobs") IS the reason they called. Don't re-ask
+    why; treat it as established and advance to Step 2. If their name is still
+    missing, get it first, then advance.
+  - A bare business name is NOT a reason — you still don't know why they
+    called, so ask how you can help.
+
+  Example, name only: ...
+word_changes_attempted: false
+deployed: true
+deployed_at: 2026-06-09T18:25
+reference_point: docs/reference-points/2026-06-09-opener-business-advance-driving-harden/
+verify_by: |
+  Run a multi-turn Stage 1 sim (or pull the next 10 inbound Stage 1 calls).
+  Cover these openers and check each transcript:
+  1. "I got your text, it's Mike" (text + name) -> Jon acknowledges the reason
+     and moves to Step 2; he does NOT ask "how can I help you".
+  2. "Yeah, I got your text" (text, no name) -> Jon asks once for the name,
+     then advances to Step 2; he does NOT re-ask the reason.
+  3. "This is Mike from ABC Epoxy" (business name, no text, no reason) -> Jon
+     still asks how he can help before leaving Step 1; he does NOT jump to the
+     Step 2 services question.
+  4. The "thanks for getting back to me" acknowledgment and the Step 2/reveal
+     anchors are unchanged (clarification adds logic, does not reword).
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

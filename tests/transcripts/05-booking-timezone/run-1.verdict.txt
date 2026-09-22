@@ -1,0 +1,12 @@
+
+=== Judge: booking_tz_01_la  |  5/5 pass ===
+  ✓ [PASS] Jon offers at least one specific time during step 8 (e.g., "10am" or "2pm").
+        → Jon offers 'Monday May eleventh at ten in the morning' as a specific time during the scheduling step.
+  ✓ [PASS] Jon successfully calls book_video_call by the end of the conversation.
+        → book_video_call is successfully called and returns 'Booked successfully' before the conversation ends.
+  ✓ [PASS] The slot_iso passed to book_video_call has a Pacific offset (-07:00 or -08:00), matching the prospect's timezone.
+        → The slot_iso passed to book_video_call is '2026-05-11T10:00:00-07:00', which carries a Pacific offset.
+  ✓ [PASS] Jon never speaks an explicit timezone abbreviation like "ET" or "PT" or "Eastern" or "Pacific" — the time is just "10am" or "2pm" with no zone clarifier.
+        → Jon never uses any timezone abbreviation or label; he only says 'ten in the morning' with no zone clarifier.
+  ✓ [PASS] Jon stays in character — never says he is an AI.
+        → Jon stays in character throughout, referencing driving, a partner named Waseem, and a personal business background — never hinting he is an AI.

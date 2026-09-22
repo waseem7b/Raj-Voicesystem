@@ -1,0 +1,145 @@
+[
+  {
+    "id": "dcdba267-0cb0-4af2-8010-9b3ffecdd976",
+    "createdAt": "2026-05-07T03:16:11.950Z",
+    "updatedAt": "2026-05-07T21:00:25.263Z",
+    "type": "function",
+    "function": {
+      "name": "mark_for_transfer",
+      "description": "Tag the prospect for transfer to the main CRM. Call this the MOMENT the prospect agrees to book a video call \u2014 BEFORE asking for their email. The transfer must run while you collect/confirm the email so the main-CRM contact is ready by booking time.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    "messages": [
+      {
+        "type": "request-response-delayed",
+        "content": "Just one sec, brother \u2014 pulling that up.",
+        "timingMilliseconds": 4000
+      }
+    ],
+    "orgId": "08ed9651-d5be-4c38-b4c2-a356e8074534",
+    "server": {
+      "url": "https://webhooks.c7a.io/voicsito/vapi/tool",
+      "timeoutSeconds": 12
+    },
+    "async": false
+  },
+  {
+    "id": "cdc4465d-e827-4453-8e29-819d6f6028f3",
+    "createdAt": "2026-05-06T03:06:22.430Z",
+    "updatedAt": "2026-05-07T21:00:25.536Z",
+    "type": "function",
+    "function": {
+      "name": "book_video_call",
+      "description": "Book the chosen ISO-8601 slot on the rep's calendar and email the prospect a video-call invite. Call mark_for_transfer FIRST, then collect email, then call this.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "description": "Prospect's email address.",
+            "type": "string"
+          },
+          "slot_iso": {
+            "description": "ISO-8601 datetime with timezone, e.g. 2026-05-08T14:30:00-07:00. Must come from a get_available_slots [iso:...] tag.",
+            "type": "string"
+          },
+          "business_name": {
+            "description": "Prospect's business / company name.",
+            "type": "string"
+          },
+          "prospect_first_name": {
+            "description": "Prospect's first name.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "slot_iso",
+          "email",
+          "prospect_first_name"
+        ]
+      }
+    },
+    "messages": [
+      {
+        "type": "request-response-delayed",
+        "content": "Just one sec, brother \u2014 pulling that up.",
+        "timingMilliseconds": 4000
+      }
+    ],
+    "orgId": "08ed9651-d5be-4c38-b4c2-a356e8074534",
+    "server": {
+      "url": "https://webhooks.c7a.io/voicsito/vapi/tool",
+      "timeoutSeconds": 60
+    },
+    "async": false
+  },
+  {
+    "id": "4936203d-b9d6-4dc9-a46a-609fded29abb",
+    "createdAt": "2026-05-06T03:06:21.036Z",
+    "updatedAt": "2026-05-07T21:00:24.979Z",
+    "type": "function",
+    "function": {
+      "name": "get_available_slots",
+      "description": "Return the next available video-call slots in the rep's calendar. Call when prospect mentions a day/time preference.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "days_ahead": {
+            "description": "Look-ahead window in days.",
+            "type": "integer",
+            "maximum": 30,
+            "minimum": 1,
+            "default": 7
+          }
+        },
+        "required": []
+      }
+    },
+    "messages": [
+      {
+        "type": "request-response-delayed",
+        "content": "Just one sec, brother \u2014 pulling that up.",
+        "timingMilliseconds": 4000
+      }
+    ],
+    "orgId": "08ed9651-d5be-4c38-b4c2-a356e8074534",
+    "server": {
+      "url": "https://webhooks.c7a.io/voicsito/vapi/tool",
+      "timeoutSeconds": 12
+    },
+    "async": false
+  },
+  {
+    "id": "278ff15a-4c7f-47cf-854f-86c132290667",
+    "createdAt": "2026-05-06T03:06:20.466Z",
+    "updatedAt": "2026-05-06T14:29:57.948Z",
+    "type": "function",
+    "function": {
+      "name": "update_prospect_info",
+      "description": "Update CRM contact fields. Fire-and-forget: call this the moment you learn the prospect first name, last name, business, or email. Does not block the conversation.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "business_name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "messages": [],
+    "orgId": "08ed9651-d5be-4c38-b4c2-a356e8074534",
+    "async": true
+  }
+]

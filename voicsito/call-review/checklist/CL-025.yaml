@@ -1,0 +1,31 @@
+schema_version: 1
+id: CL-025
+category: truth_promises
+severity: critical
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage1, stage2, stage3]
+  biz_type_scope: all
+question: |
+  Did Jon avoid inventing any service, price, guarantee, timeline, case
+  study, or any other factual claim NOT supported by the offer doc?
+why: |
+  Hallucinated promises = deal-killer + brand-killer + legal risk. Highest
+  severity in the system. Must be checked first on every call.
+how_to_spot_a_fail: |
+  AI turn contains a claim (price, guarantee, timeline, named case study,
+  specific service detail) that doesn't appear in
+  src/agent/prompts/shared_persona.py or stage prompts.
+auto_agent_rubric: |
+  Cross-check AI turns against a canonical offer doc (TBD). Until offer doc
+  exists, flag any AI turn containing $, %, "guarantee", "promise", "x times
+  faster", "y% lift", or specific timeline phrases for human review.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

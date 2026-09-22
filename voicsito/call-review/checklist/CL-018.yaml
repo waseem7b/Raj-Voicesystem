@@ -1,0 +1,29 @@
+schema_version: 1
+id: CL-018
+category: booking
+severity: critical
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage3]
+  biz_type_scope: all
+question: |
+  Did Jon stay silent for ≥ 5 seconds after the buying question, letting the
+  prospect answer?
+why: |
+  Hormozi: 8+ seconds of silence after the buying question worth 23–40%
+  close-rate. We test at 5s to allow for some Jon-personality.
+how_to_spot_a_fail: |
+  Jon's booking-ask turn followed by another Jon turn within 5s with no
+  prospect speech in between.
+auto_agent_rubric: |
+  Inspect inter-turn timing post-booking-ask. Fail if subsequent Jon turn
+  within 5s and no prospect turn in between.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

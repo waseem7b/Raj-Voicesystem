@@ -1,0 +1,60 @@
+schema_version: 1
+id: CL-005
+category: opener
+severity: high
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage1]
+  biz_type_scope: all
+question: |
+  Did Stage 1 capture the prospect's first name before pivoting to the
+  reveal, and avoid re-asking the reason once the prospect had already
+  referenced the text/message/jobs? When the prospect referenced the
+  text/message OR named their business, did the opener acknowledge it
+  with the callback-aware "thanks for getting back to me" rather than the
+  generic "appreciate you calling"? When the prospect gave only a name
+  with no stated reason, a brief "how can I help you?" to surface the
+  reason is acceptable.
+why: |
+  We initiated the contact via text, so when the prospect references the
+  text, jobs, or their business, re-asking why they called signals the
+  agent wasn't listening — breaks rapport instantly. Acknowledge and move
+  forward in that case. When the prospect offers only a name and no
+  reason, a short "how can I help you?" is the natural way to surface what
+  they need before the reveal. Pivoting without confirming who they are
+  still turns the reveal into a cold pitch — name capture remains required.
+how_to_spot_a_fail: |
+  Any of:
+  - update_prospect_info tool call missing first_name, OR
+  - reveal section appears in transcript before any prospect-said-name turn, OR
+  - AI turn asks "how can I help you" / "what can I do for you" /
+    "what brings you in" / similar AFTER the prospect already referenced
+    the text, jobs, or their business (re-asking a known reason), OR
+  - AI turn re-asks the reason after the prospect already mentioned the
+    text or jobs, OR
+  - prospect's own words referenced the text/message we sent OR named
+    their business but the opener still used "appreciate you calling"
+    instead of the callback-aware "thanks for getting back to me", OR
+  - prospect did NOT mention a text OR their business on their opening
+    turn but the opener used "thanks for getting back to me" anyway (the
+    trigger is the prospect's spoken reference to the text or their
+    business, never the background fact that we texted them).
+auto_agent_rubric: |
+  Two checks, both must pass:
+  1. Tool-call sequence: update_prospect_info(first_name=...) must
+     precede the reveal line.
+  2. Step 1 AI turns must NOT match /(how can I (help|assist) you|what
+     can I do for you|what brings you|how may I help|what'?s going on)/i
+     once the prospect has referenced the text/jobs or named their
+     business. A bare name with no stated reason is allowed to draw a
+     single "how can I help you?" to surface the reason. Greeting-only
+     allows a single "...sorry, I didn't catch your name?".
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

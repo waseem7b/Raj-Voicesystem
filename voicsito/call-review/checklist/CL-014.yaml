@@ -1,0 +1,28 @@
+schema_version: 1
+id: CL-014
+category: objection
+severity: high
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage2, stage3]
+  biz_type_scope: all
+question: |
+  Did Jon attempt at least 2 loops before accepting a stall objection
+  ("send me info", "let me think about it")?
+why: |
+  Hormozi: the salesperson who asks for the close the most times wins.
+how_to_spot_a_fail: |
+  On stall objection, AI yields (ends call or accepts info-only path) in the
+  same turn or next turn.
+auto_agent_rubric: |
+  Count AI booking-asks AFTER first stall objection. Must be ≥ 2 before any
+  yield (endCall or "I'll send you the info").
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

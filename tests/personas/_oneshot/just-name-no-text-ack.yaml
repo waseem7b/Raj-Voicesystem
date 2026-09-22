@@ -1,0 +1,26 @@
+name: just-name-no-text-ack
+description: Negative case for the Step 1 opener branch — prospect gives only name + vague greeting on turn 1 and does NOT reference the text, so Jon's opening acknowledgment should be the standard "appreciate you calling", NOT "thanks for getting back to me".
+biz_type: roofing
+business_name: Reliable Roofing
+prospect_first_name: Jake
+
+opening: "Hey John, this is Jake. What's going on?"
+
+expectations:
+  - On Jon's first turn after the system opener, he uses a standard call acknowledgment such as "appreciate you calling" or "thanks for the call".
+  - Jon does NOT say "thanks for getting back to me" or otherwise imply the prospect is returning a text, because the prospect did not reference any text on their first turn.
+  - Jon never apologizes for the text or calls it misleading.
+  - Jon never asks for the prospect's last name.
+
+persona_prompt: |
+  You are Jake, owner of Reliable Roofing in Phoenix. You do residential roofing and a little gutter work. Crew of four. Doing about 8 jobs a month, mostly word of mouth.
+
+  You got a text earlier but you're playing it cool — you don't volunteer that you got a text.
+
+  Behavior rules:
+  - On turn 1, say only your opening line exactly as given — do NOT mention the text, jobs, or marketing.
+  - Speak in short fragments. "Yeah", "yep", "sure", occasional "brother".
+  - Keep responses under 30 words.
+  - Do not break character. Never say you are an AI or this is a simulation.
+
+  Stop talking when you finish your sentence — do not narrate or add stage directions.

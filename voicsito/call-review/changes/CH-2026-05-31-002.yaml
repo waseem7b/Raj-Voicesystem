@@ -1,0 +1,75 @@
+schema_version: 1
+id: CH-2026-05-31-002
+created: 2026-05-31T00:00
+session: 2026-05-31-opener-driving-caveat-once
+driven_by:
+  observations: []
+  checklist_items: [CL-021]
+prompt_file: src/agent/prompts/shared_persona.py
+stage: all
+section: "Live-call mechanics — Interruptions; Plain spoken English (SSML break exception)"
+prompt_file_sha256_before: "460fe0009c36846e5ee009382083743013c1a61853874337f1bfcc501b13fa1a"
+prompt_file_sha256_after: "045580904a6d660cb331c94037a10deecefa108dd35564a353763e99992fb797"
+escape_reason: ""
+hypothesis: |
+  RETROACTIVE BACKFILL — not authored this session. shared_persona.py was
+  modified by two committed changes after CH-2026-05-28-002 with no paired
+  ledger entry, leaving the change log's latest sha stale and the
+  check_checklist_sync gate red. This entry records both, restoring sync.
+  Discovered during the 2026-05-31 opener driving-caveat session.
+
+  1. Interruption handling (commit d1b970e, 2026-05-30): the interruption
+     rule changed from "finish the rest of the anchor on your NEXT turn" to
+     "resume from the exact sentence where you were cut off — never
+     re-recite from the top of the statement." Brings shared_persona in
+     line with the fuller version already in inbound_texts.py. Rationale:
+     re-reciting an anchor from the top after an interruption sounds robotic
+     and burns the prospect's patience; resuming from the cut-off point
+     keeps the call human. Paired with the CL-021 extension this session.
+
+  2. Plain-spoken-English SSML exception (commit 4724448): the
+     no-symbols / no-markdown output rule gained one exception — when a step
+     explicitly instructs it, the model emits a `<break time="..."/>` timing
+     marker verbatim (these control TTS pacing and are never spoken).
+     Output-format change. No rubric item created today — flagged for its
+     own CL if rubric coverage is wanted.
+expected_outcome:
+  metric: ""
+  direction: ""
+  magnitude: ""
+  verify_after_n_calls: 0
+before: |
+  Interruptions rule:
+  "...give them the floor immediately, address what they said, and finish
+  the rest of the anchor on your NEXT turn before advancing."
+
+  Plain spoken English:
+  "...no parentheticals, no stage directions."
+after: |
+  Interruptions rule:
+  "...give them the floor immediately, address what they said, then on your
+  next turn resume from the exact sentence where you were cut off — never
+  re-recite from the top of the statement."
+
+  Plain spoken English:
+  "...no parentheticals, no stage directions. The one exception: when a step
+  explicitly tells you to emit a `<break time="..."/>` timing marker, output
+  it exactly as written — these markers control pacing and are never spoken."
+word_changes_attempted: true
+deployed: true
+deployed_at: 2026-06-09T18:25
+reference_point: docs/reference-points/2026-06-09-opener-business-advance-driving-harden/
+verify_by: |
+  Backfill of already-committed prompt changes; this ledger entry triggers
+  no new deploy, and the live-Vapi push status of d1b970e / 4724448 was not
+  verified here. To validate behavior on a real or simulated call:
+  1. (CL-021) After an interruption mid-anchor, Jon's next turn continues
+     from the cut-off point and does NOT restart the anchor from its opening
+     words.
+  2. (SSML) When a step emits a `<break time="..."/>` marker, the marker
+     reaches TTS as a pause and is never spoken aloud as text.
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: "Retroactive ledger entry to clear pre-existing drift from commits d1b970e + 4724448; behavior not re-verified this session."

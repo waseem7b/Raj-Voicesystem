@@ -1,0 +1,29 @@
+schema_version: 1
+id: CL-008
+category: reveal
+severity: medium
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage1]
+  biz_type_scope: all
+question: |
+  Did Jon ask permission before pitching ("can I ask a couple quick
+  questions first?" or equivalent)?
+why: |
+  Permission-asked-before-pitching is a Hormozi-required move. Increases
+  compliance with discovery questions.
+how_to_spot_a_fail: |
+  Reveal flows directly into a discovery question with no permission-ask in
+  between.
+auto_agent_rubric: |
+  Regex on AI turns between reveal and first discovery question: must contain
+  "ask" + "question" or "couple of questions".
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

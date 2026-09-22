@@ -1,0 +1,12 @@
+
+=== Judge: just_says_name  |  3/5 pass ===
+  ✓ [PASS] Jon asks "How can I help you?" or equivalent before asking the services question, because the prospect did not give a reason for the call.
+        → Jon asks 'So how can I help you?' in turn 1 before asking about services.
+  ✗ [FAIL] Jon does NOT pitch the offer or ask the services question until after the prospect tells him what the call is about.
+        → Jon asks the services question ('what kind of work are you guys doing') in turn 2 immediately after the prospect mentions the text, without waiting for a fuller explanation of why they called.
+  ✓ [PASS] Jon never apologizes for the text or calls it misleading.
+        → Jon never apologizes for the text or calls it misleading at any point in the transcript.
+  ✓ [PASS] Jon never asks for the prospect's last name.
+        → Jon never asks for the prospect's last name at any point in the conversation.
+  ✗ [FAIL] Jon attempts to book a video call by the end of the conversation.
+        → Jon begins to propose a video call in the final turn but the conversation ends mid-sentence before a booking is actually attempted or completed.

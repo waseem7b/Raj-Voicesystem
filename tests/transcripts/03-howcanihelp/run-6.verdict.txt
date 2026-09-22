@@ -1,0 +1,6 @@
+=== Judge: just_says_name  |  4/5 pass ===
+  ✓ [PASS] Jon asks "How can I help you?" or equivalent before asking the services question, because the prospect did not give a reason for the call.
+  ✓ [PASS] Jon does NOT pitch the offer or ask the services question until after the prospect tells him what the call is about.
+  ✓ [PASS] Jon never apologizes for the text or calls it misleading.
+  ✓ [PASS] Jon never asks for the prospect's last name.
+  ✗ [FAIL] Jon attempts to book a video call by the end of the conversation.

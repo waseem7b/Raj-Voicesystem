@@ -1,0 +1,60 @@
+schema_version: 1
+id: CH-2026-06-09-001
+created: 2026-06-09T00:00
+session: 2026-06-09-opener-business-advance-driving-harden
+driven_by:
+  observations: []
+  checklist_items: [CL-030]
+prompt_file: src/agent/prompts/stage1_inbound_texts.py
+stage: stage1
+section: "Step 1 — Opening (business name / stated trade now advances; reverses the CL-030 bare-business 'how can I help' branch)"
+prompt_file_sha256_before: "d68c8bb3fbd15fde523cafee5893e8bb6907b1b2fd365eb736f20ee6b55be786"
+prompt_file_sha256_after: "29bda3be759880f4bfb2f27129cd178b4ac00c7d9817e968fbc5d03fe373faf1"
+escape_reason: ""
+hypothesis: |
+  Operator (2026-06-09): when a caller names their business or says what they
+  do, Jon should acknowledge briefly (in his own words) and move into the flow
+  — not re-ask "how can I help". The 2026-06-04 design (CL-030) deliberately
+  treated a bare business name as NOT a reason and routed it to "how can I
+  help"; on real calls that reads as Jon not listening to a contractor who
+  just told him who they are. This reverses that branch: a business name or a
+  stated trade now counts as established context -> advance to Step 2 (grab the
+  name first if still missing). Only a bare name with zero context still routes
+  to "how can I help". Structure-only — no locked anchor wording changed; the
+  "...so how can I help you?" phrase is preserved for the narrowed branch.
+expected_outcome:
+  metric: opener_robot_tell_rate
+  direction: down
+  magnitude: moderate
+  verify_after_n_calls: 10
+before: |
+  Follow-up table:
+    - Name only, or name + business, but no reason and no text mention given
+      -> append "...so how can I help you?"
+    - Name AND a reason (text / jobs / marketing / work) -> acknowledge ...,
+      then stop; Step 2 is your next turn
+  What counts as a "reason" — and what doesn't:
+    - A bare business name is NOT a reason — you still don't know why they
+      called, so ask how you can help.
+after: |
+  Follow-up table:
+    - Name only, with no reason, no text mention, and no business or trade
+      given -> append "...so how can I help you?"
+    - Name AND any call context (text / jobs / marketing / work / their
+      business name / the trade they do) -> acknowledge what they gave you in a
+      few words, then stop; Step 2 is your next turn
+  What counts as context to move forward:
+    - A business name or the trade they do (e.g. "from ABC Epoxy", "I do
+      roofing") IS enough context to move forward. Don't re-ask how you can
+      help; treat it as established and advance to Step 2. If their name is
+      still missing, get it first, then advance.
+word_changes_attempted: false
+deployed: true
+deployed_at: 2026-06-09T18:25
+reference_point: docs/reference-points/2026-06-09-opener-business-advance-driving-harden/
+verify_by: "sim: curious_first_timer one-shots — business-name and trade openers must advance to Step 2 without a 'how can I help' re-ask; name-only must still ask how can I help"
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

@@ -1,0 +1,43 @@
+schema_version: 1
+id: CH-2026-05-28-002
+created: 2026-05-28T00:00
+session: 2026-05-28-ai-challenge-handler
+driven_by:
+  observations: []
+  checklist_items: [CL-027]
+prompt_file: src/agent/prompts/shared_persona.py
+stage: all
+section: "Direct AI challenge"
+prompt_file_sha256_before: "7e2e10bd53f685457a102bb3503f933a2434e353961143995dfbd9de6f4e0282"
+prompt_file_sha256_after: "460fe0009c36846e5ee009382083743013c1a61853874337f1bfcc501b13fa1a"
+escape_reason: ""
+hypothesis: |
+  Adding a two-sentence Bluetooth deflect anchor for direct "are you an AI?"
+  challenges prevents Jon from rambling or breaking character. Combines an
+  identity assertion ("I'm Jon man") with a plausible environmental reason
+  for sounding different (Bluetooth speaker in truck). Returns to flow
+  immediately with no further explanation.
+expected_outcome:
+  metric: ""
+  direction: ""
+  magnitude: ""
+  verify_after_n_calls: 5
+before: |
+  No handler — Jon improvised with unpredictable length and inconsistent framing.
+after: |
+  New section in shared_persona.py (applies all stages):
+  Anchor (verbatim): "Haha — I'm Jon man. Yeah, I'm on a Bluetooth speaker
+  in my truck — it can cut out a little, you good?"
+  Rule: two sentences max, then return immediately to the step you were on.
+word_changes_attempted: true
+deployed: true
+deployed_at: "2026-05-28T00:00Z"
+reference_point: "docs/reference-points/2026-05-28-ai-challenge-handler/"
+verify_by: |
+  Ask "are you an AI?" during a live call. Confirm Jon's response is 2 sentences,
+  contains the Bluetooth deflect, and Jon returns to the flow immediately after.
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

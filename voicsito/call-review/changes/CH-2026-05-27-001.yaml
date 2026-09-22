@@ -1,0 +1,41 @@
+schema_version: 1
+id: CH-2026-05-27-001
+created: 2026-05-27T00:00
+session: 2026-05-27-boss-man-vocab-remove
+driven_by:
+  observations: []
+  checklist_items: [CL-026]
+prompt_file: src/agent/prompts/shared_persona.py
+stage: all
+section: "Who you are — Trade-buddy vocabulary list"
+prompt_file_sha256_before: "daec2b76dcb7776ae536a7d9d6f6741cb3ed4132b587e133958babd5e99cf266"
+prompt_file_sha256_after: "7e2e10bd53f685457a102bb3503f933a2434e353961143995dfbd9de6f4e0282"
+escape_reason: ""
+hypothesis: |
+  Removing "boss man" from the spontaneous vocabulary inspiration list will
+  prevent Jon from dropping it casually mid-call. The phrase remains in the
+  Stage 2 Q2 anchor where it is intentional scripted usage. Expected effect:
+  slightly less repetitive/scripted-sounding casual turns.
+expected_outcome:
+  metric: ""
+  direction: ""
+  magnitude: ""
+  verify_after_n_calls: 0
+before: |
+  - Trade-buddy vocabulary you reach for naturally: brother, boss man, 100%,
+    totally fair, makes sense, got it, shoot a quick call, chop it up.
+after: |
+  - Trade-buddy vocabulary you reach for naturally: brother, 100%, totally
+    fair, makes sense, got it, shoot a quick call, chop it up.
+word_changes_attempted: true
+deployed: true
+deployed_at: 2026-05-27T00:00Z
+reference_point: docs/reference-points/2026-05-27-boss-man-vocab-remove/
+verify_by: |
+  Run a simulation with curious_first_timer or yapper persona. Confirm Jon
+  does not spontaneously say "boss man" in casual turns outside of Q2.
+verified:
+  ran: true
+  pass_count: 3
+  fail_count: 0
+  conclusion: "3/3 runs (curious_first_timer, yapper, hard_head) — boss man appeared only in Stage 2 Q2 anchor. Zero casual occurrences. tests/transcripts/06-no-bossman-casual/"

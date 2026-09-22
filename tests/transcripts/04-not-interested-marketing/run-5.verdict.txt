@@ -1,0 +1,12 @@
+
+=== Judge: not_interested_05_painting  |  4/5 pass ===
+  ✓ [PASS] Jon does NOT skip the verify step ("if we could actually get you more work in your area, is that even something you'd want?") — this is the first objection.
+        → Jon asks the verbatim verify question in turn 4: 'if we could actually get you more painting work coming in, more residential jobs in your area, is that even something you'd want?'
+  ✗ [FAIL] {'Jon hits the verbatim triage question': "what's making you hesitant on the marketing side specifically? Past experience with it, the cost, something else?"}
+        → Jon never asks the verbatim triage question about what's making Tony hesitant on the marketing side specifically; he pivots to a future-vision question in turn 6 instead.
+  ✓ [PASS] Jon uses "and" not "but" in his acknowledge.
+        → In turn 5 Jon uses 'and' ('And look, I'm not trying to tell you...') and in turn 6 uses 'and I respect that,' never substituting 'but' in his acknowledges.
+  ✓ [PASS] Jon does NOT mock Tony for being "old-school" or suggest he's behind the times.
+        → Jon never mocks or belittles Tony's old-school approach; he validates it throughout (turns 5 and 6).
+  ✓ [PASS] Jon stays in character — never says he is an AI.
+        → Jon never breaks character or discloses being an AI at any point in the transcript.

@@ -1,0 +1,27 @@
+schema_version: 1
+id: CL-004
+category: opener
+severity: high
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage1]
+  biz_type_scope: all
+question: |
+  Did Jon say his own name within the first 5 words of his first utterance?
+why: |
+  Inbound callers expect to know who picked up. Hormozi intro element #1:
+  "your name." Ambiguous opener = trust loss.
+how_to_spot_a_fail: |
+  First 5 words of the first AI turn don't contain "Jon".
+auto_agent_rubric: |
+  Regex on first AI turn: words[:5] must include token "Jon"
+  (case-insensitive).
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

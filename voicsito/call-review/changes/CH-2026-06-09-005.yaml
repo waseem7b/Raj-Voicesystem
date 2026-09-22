@@ -1,0 +1,31 @@
+schema_version: 1
+id: CH-2026-06-09-005
+created: 2026-06-09T00:04
+session: 2026-06-09-opener-business-advance-driving-harden
+driven_by:
+  observations: []
+  checklist_items: []
+prompt_file: src/agent/prompts/confirm_persona.py
+stage: confirm
+section: bootstrap
+prompt_file_sha256_before: ""
+prompt_file_sha256_after: "c32073e3bf11f4549af940b34386a46c5237fa9260b55d46a0678f099bfe2061"
+escape_reason: "bootstrap backfill — new prompt file on feat/outbound-demo-confirmation had no ledger entry, blocking check_checklist_sync; records current on-disk sha as the pre-review baseline. No review-driven behavior change this session."
+hypothesis: ""
+expected_outcome:
+  metric: ""
+  direction: ""
+  magnitude: ""
+  verify_after_n_calls: 0
+before: ""
+after: ""
+word_changes_attempted: false
+deployed: false
+deployed_at: ""
+reference_point: ""
+verify_by: ""
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

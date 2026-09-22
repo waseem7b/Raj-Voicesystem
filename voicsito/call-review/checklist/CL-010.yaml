@@ -1,0 +1,31 @@
+schema_version: 1
+id: CL-010
+category: discovery
+severity: high
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage2]
+  biz_type_scope: all
+question: |
+  Did Jon recap the prospect's pain in their own words before transitioning
+  to the booking ask?
+why: |
+  Pain Cycle step 6. Skipping recap = prospect doesn't feel heard = weak
+  booking.
+how_to_spot_a_fail: |
+  Transcript shows Jon transitioning to booking within 1-2 turns of last
+  discovery question with no "so it sounds like" / "let me make sure" /
+  "to recap" phrase.
+auto_agent_rubric: |
+  Between last discovery turn and first Stage-3 booking-ask turn, AI must
+  include phrases matching /so it sounds like|let me make sure|to recap|what
+  I'm hearing/.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

@@ -1,0 +1,29 @@
+schema_version: 1
+id: CL-017
+category: booking
+severity: high
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage3]
+  biz_type_scope: all
+question: |
+  Did Jon offer the slot as a binary choice ("Tuesday at 2 or Wednesday at
+  11?") rather than an open question?
+why: |
+  Open questions ("when works for you?") increase friction and lower book
+  rate.
+how_to_spot_a_fail: |
+  Booking-ask AI turn contains open phrasing ("when works", "what time")
+  with no specific slot pair.
+auto_agent_rubric: |
+  AI turn following get_available_slots must contain two specific datetimes
+  or day-time tokens, joined by "or".
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

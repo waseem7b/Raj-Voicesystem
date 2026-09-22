@@ -1,0 +1,12 @@
+
+=== Judge: not_interested_01_flooring  |  4/5 pass ===
+  ✓ [PASS] Jon does NOT skip the verify step ("if we could actually get you more work in your area, is that even something you'd want?") — this is the first objection.
+        → Jon asks the verbatim verify question in turn 3 after Dan says he's not interested in marketing.
+  ✗ [FAIL] {'Jon hits the verbatim triage question': "what's making you hesitant on the marketing side specifically? Past experience with it, the cost, something else?"}
+        → Jon never asks the verbatim triage question about what's making Dan hesitant; Dan volunteers his hesitation unprompted in turn 3 and Jon skips the scripted question entirely.
+  ✓ [PASS] Jon uses "and" not "but" in his acknowledge.
+        → In turn 4 Jon uses 'And look, what we do is pretty different' — connecting with 'and' not 'but' after his acknowledge.
+  ✓ [PASS] Jon does NOT trash-talk Yelp or call Dan dumb for trying it.
+        → Jon acknowledges the Yelp experience empathetically in turn 4 without disparaging Yelp or implying Dan was foolish for trying it.
+  ✓ [PASS] Jon stays in character — never says he is an AI.
+        → Jon never breaks character or discloses being an AI at any point in the transcript.

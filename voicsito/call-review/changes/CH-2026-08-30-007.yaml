@@ -1,0 +1,46 @@
+schema_version: 1
+id: CH-2026-08-30-007
+created: 2026-08-30T21:55
+session: 2026-08-30-ashley-emdash-sentence-ends
+driven_by:
+  observations: []
+  checklist_items: [CL-033]
+prompt_file: src/agent/prompts/ashley_barebones.py
+stage: demo_test
+section: "NEW FILE — barebones twin of the day-of reminder, routed as call_type 'test'"
+prompt_file_sha256_before: ""
+prompt_file_sha256_after: "8fce7aa9f32e7cd000457721b3539b15549bd43c0a841bff94af068c96cba04f"
+escape_reason: ""
+hypothesis: |
+  Owner request (2026-08-30): disconnect the 24k-char prompt, not the plumbing.
+  The production reminder prompt is 24,158 chars with 42 gates; this twin is
+  1,190 chars with none, and is otherwise identical — same spoken words, same
+  ` -- --` markers in the same four sentence-end positions, same
+  {{firstName}} / {{greeting}} / {{bookedTime}} variables from the same GHL
+  lookup, and byte-identical voice config (turbo_v2_5, speed 0.90,
+  stability 0.45, style 0.65, chunkPlan 80 on . ! ?, backgroundSound office).
+  Hypothesis: if the markers behave here but not in production, prompt size or
+  gate volume is the cause. If they misbehave identically, the prompt is
+  exonerated and the cause is ElevenLabs or Vapi's chunker.
+  Carries no tools deliberately, so a test call tags nothing in GHL.
+expected_outcome:
+  metric: "vocalised markers per call, barebones vs production"
+  direction: "differential"
+  magnitude: "any difference isolates the cause"
+  verify_after_n_calls: 1
+before: |
+  No barebones variant existed; every test ran against the full 24k prompt.
+after: |
+  New assistant "Voicsito - Ashley - TEST" (67641961-542c-4b5f-831f-6b80bef8833b),
+  1,190-char prompt, zero tools, reached via call_type "test" on the existing
+  /ghl/outbound-call route.
+word_changes_attempted: false
+deployed: true
+deployed_at: 2026-08-31T04:55
+reference_point: "git tag ashley-pre-multidash"
+verify_by: "One call_type=test call vs one call_type=reminder call, same marker positions, compare vocalised-marker counts."
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

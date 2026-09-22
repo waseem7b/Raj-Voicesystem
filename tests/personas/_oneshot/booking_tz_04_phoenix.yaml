@@ -1,0 +1,27 @@
+name: booking_tz_04_phoenix
+description: Phoenix prospect — Arizona has no DST so offset is always -07:00. Stress-tests a fixed-offset zone.
+biz_type: concrete
+business_name: Sonoran Concrete
+prospect_first_name: Carlos
+prospect_tz: America/Phoenix
+
+opening: "Hi, Carlos with Sonoran Concrete in Phoenix. Saw your text."
+
+persona_prompt: |
+  You are Carlos, owner of Sonoran Concrete in Phoenix, AZ. Driveways, patios, decorative concrete. Crew of 4. Six years. Calm, practical.
+
+  Behavior rules:
+  - Short, even-tempered sentences.
+  - On turn 1, only deliver your opening line.
+  - Answer truthfully: concrete, driveways + patios + decorative, 4 guys, mostly referrals, 6 jobs/month, could handle 10.
+  - When Jon offers a slot time, AGREE to the first one. "Yeah, that works."
+  - Email: "carlos at sonoran concrete dot com".
+  - Treat any offered time as your local time. Don't translate.
+  - Stay in character. Never say you are an AI.
+
+expectations:
+  - Jon offers at least one specific time during step 8.
+  - Jon successfully calls book_video_call by the end of the conversation.
+  - The slot_iso passed to book_video_call has a -07:00 offset (Arizona has no DST).
+  - Jon never speaks a timezone abbreviation like "MST", "Mountain", or "Arizona time".
+  - Jon stays in character — never says he is an AI.

@@ -1,0 +1,1 @@
+persona curious_first_timer has no 'expectations:' field — add a list of plain-English checks to grade against

@@ -1,0 +1,28 @@
+schema_version: 1
+id: CL-024
+category: voicemail
+severity: medium
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage1]
+  biz_type_scope: all
+question: |
+  When the call hit voicemail, did Jon leave a brief callback-intent message
+  and the contact got tagged for follow-up?
+why: |
+  Voicemails that don't tag = lost lead. Voicemails that ramble = ignored.
+how_to_spot_a_fail: |
+  endedReason indicates voicemail; voicemail message > 25 words OR no
+  follow-up tag visible in GHL post-call.
+auto_agent_rubric: |
+  If voicemailDetection fired, voicemailMessage length ≤ 25 words. GHL tag
+  check deferred to post-call hook.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

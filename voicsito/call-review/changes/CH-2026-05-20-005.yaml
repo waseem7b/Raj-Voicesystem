@@ -1,0 +1,31 @@
+schema_version: 1
+id: CH-2026-05-20-005
+created: 2026-05-20T17:00
+session: bootstrap
+driven_by:
+  observations: []
+  checklist_items: []
+prompt_file: src/agent/prompts/stage3_book.py
+stage: bootstrap
+section: bootstrap
+prompt_file_sha256_before: ""
+prompt_file_sha256_after: "0a955b05072c124b632a317e36844a48c3b045ae74697f823e96d84b1fad15a1"
+escape_reason: "bootstrap — establishes pre-review baseline; no behavior change"
+hypothesis: ""
+expected_outcome:
+  metric: ""
+  direction: ""
+  magnitude: ""
+  verify_after_n_calls: 0
+before: ""
+after: ""
+word_changes_attempted: false
+deployed: true
+deployed_at: 2026-05-20T17:00
+reference_point: docs/reference-points/2026-05-20-call-review-launch/
+verify_by: ""
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

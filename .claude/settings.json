@@ -1,0 +1,17 @@
+{
+  "permissions": {},
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-open-issues.py\"",
+            "timeout": 10,
+            "statusMessage": "Loading open issues..."
+          }
+        ]
+      }
+    ]
+  }
+}

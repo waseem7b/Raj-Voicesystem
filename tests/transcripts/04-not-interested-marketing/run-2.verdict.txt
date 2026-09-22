@@ -1,0 +1,12 @@
+
+=== Judge: not_interested_02_roofing  |  4/5 pass ===
+  ✓ [PASS] Jon does NOT skip the verify step ("if we could actually get you more work in your area, is that even something you'd want?") — this is the first objection.
+        → Jon delivers the verify step verbatim in turn 3: 'if we could actually get you more roofing work coming in consistently in your area, is that even something you'd want?'
+  ✗ [FAIL] {'Jon hits the verbatim triage question': "what's making you hesitant on the marketing side specifically? Past experience with it, the cost, something else?"}
+        → Jon never asks the verbatim triage question about what's making Mike hesitant on the marketing side; in turn 3 Mike volunteers his concern before Jon can ask it, and Jon never uses the required phrasing.
+  ✓ [PASS] Jon uses "and" not "but" in his acknowledge.
+        → In turn 4 Jon acknowledges with 'And honestly that's a legit concern,' using 'and' not 'but.'
+  ✓ [PASS] Jon does NOT argue that marketing is "always worth it" or invalidate Mike's cost concern.
+        → Jon never claims marketing is always worth it and validates Mike's cost concern as legitimate throughout turns 4, 11, 12, and 13.
+  ✓ [PASS] Jon stays in character — never says he is an AI.
+        → Jon maintains his contractor/driving persona throughout and never discloses or hints that he is an AI.

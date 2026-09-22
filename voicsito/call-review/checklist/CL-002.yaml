@@ -1,0 +1,27 @@
+schema_version: 1
+id: CL-002
+category: voice_tts
+severity: medium
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage1, stage2, stage3]
+  biz_type_scope: all
+question: |
+  Did Jon's pace feel natural for the call's emotional context (not rushed
+  when handling an objection, not slow when opening)?
+why: |
+  Pace mismatch signals robotic delivery. Seed item.
+how_to_spot_a_fail: |
+  Compare ms-per-word against expected (~150–170 wpm). Sustained drift above
+  200 wpm or below 120 wpm is a fail.
+auto_agent_rubric: |
+  Compute words-per-minute on transcript; flag turns outside 120–200 wpm.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

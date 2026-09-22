@@ -1,0 +1,10 @@
+
+=== Judge: name-biz-no-text-ack  |  4/4 pass ===
+  ✓ [PASS] On Jon's first turn after the system opener, he uses the callback-aware "thanks for getting back to me", because the prospect named their business.
+        → Jon opens with 'thanks for getting back to me Mike' in his first turn after the system opener.
+  ✓ [PASS] Jon does NOT open with the generic "appreciate you calling" / "thanks for the call", since the prospect named their business.
+        → Jon does not use 'appreciate you calling' or 'thanks for the call' anywhere in the transcript.
+  ✓ [PASS] Jon does NOT ask "how can I help you" or any equivalent open-ended "why are you calling" question.
+        → Jon never asks 'how can I help you' or any equivalent open-ended question.
+  ✓ [PASS] Jon never apologizes for the text or calls it misleading.
+        → Jon never apologizes for a text or calls it misleading anywhere in the transcript.

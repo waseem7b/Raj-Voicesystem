@@ -1,0 +1,12 @@
+
+=== Judge: booking_tz_03_chicago  |  5/5 pass ===
+  ✓ [PASS] Jon offers at least one specific time during step 8.
+        → Jon offers 'Monday May eleventh at ten in the morning' and 'Sunday the tenth also at ten' as specific times.
+  ✓ [PASS] Jon successfully calls book_video_call by the end of the conversation.
+        → book_video_call is successfully called with all required parameters before the conversation ends.
+  ✓ [PASS] The slot_iso passed to book_video_call has a Central offset (-05:00 or -06:00).
+        → The slot_iso passed is '2026-05-10T10:00:00-05:00', which carries a valid Central offset of -05:00.
+  ✓ [PASS] Jon never speaks a timezone abbreviation like "CT", "CST", or "Central".
+        → Jon never uses 'CT', 'CST', 'CDT', or 'Central' anywhere in the transcript.
+  ✓ [PASS] Jon stays in character — never says he is an AI.
+        → Jon maintains his human persona throughout, referencing driving, a partner named Waseem, and owning a flooring company without ever indicating he is an AI.

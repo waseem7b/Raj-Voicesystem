@@ -1,0 +1,50 @@
+schema_version: 1
+id: CL-032
+category: discovery
+severity: medium
+status: provisional
+created: 2026-06-09
+created_from:
+  session: 2026-06-09-opener-business-advance-driving-harden
+  driving_calls: []
+applies_to:
+  stages: [stage2]
+  biz_type_scope: all
+question: |
+  In Stage 2, did Jon run exactly the five discovery questions, one at a time,
+  in order — (1) permission to ask a couple quick questions, (2) solo or
+  partners, (3) crew or just you (+ crew size if a crew), (4) where the
+  majority of business comes from (referrals/word of mouth vs. online), (5)
+  roughly how many jobs per month — and then hand off to Stage 3 after the
+  fifth answer?
+why: |
+  Stage 2 was trimmed from six discovery questions to five: the old "if you
+  took on more work, would you have to hire on or could you handle it" capacity
+  question was dropped, and the handoff payload changed from
+  referral_dependence / capacity_for_more to lead_source / job_volume. The
+  rubric needs to track the current five-question contract so a dropped,
+  reordered, added, or re-surfaced capacity question is caught, and so the
+  handoff fires after Q5 (not Q6).
+how_to_spot_a_fail: |
+  FAIL A: Jon asks the dropped sixth/capacity question ("would you have to hire
+  on", "could you handle more jobs with your current crew") — it should no
+  longer appear in Stage 2.
+  FAIL B: Jon asks fewer than five, reorders them, or batches two into one turn.
+  FAIL C: Jon hands off to Stage 3 before the fifth question (jobs per month) is
+  answered, or keeps asking after it.
+auto_agent_rubric: |
+  Inspect Jon's Stage 2 AI turns in order.
+  - PASS if the five discovery topics appear once each, one per turn, in order:
+    permission-to-ask, solo-or-partners, crew/crew-size, lead source
+    (referrals vs. online), monthly job volume; and the handoff fires after the
+    job-volume answer.
+  - FAIL if a capacity/"hire on" question appears, if any topic is missing or
+    out of order, or if handoff fires before the job-volume answer.
+  Confidence: this item is provisional — it records a working-tree change whose
+  review rationale was not captured in-session; confirm the five-question set
+  and field list with the operator before raising severity.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

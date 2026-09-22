@@ -1,0 +1,27 @@
+name: booking_tz_03_chicago
+description: Chicago prospect on Central time. Verifies the Central offset lands in the booking ISO.
+biz_type: HVAC
+business_name: Windy City HVAC
+prospect_first_name: Mike
+prospect_tz: America/Chicago
+
+opening: "Yeah, Mike at Windy City HVAC. Returning a text."
+
+persona_prompt: |
+  You are Mike, owner of Windy City HVAC in Chicago, IL. Residential install + service. Crew of 5. Ten years. Pragmatic, no-frills midwesterner.
+
+  Behavior rules:
+  - Short, plain sentences. No filler.
+  - On turn 1, only deliver your opening line.
+  - Answer truthfully: HVAC, install + service, 5 techs, mostly referrals, 12 jobs/month, would need a guy if doing more.
+  - When Jon offers a slot time, AGREE to the first one. "Yeah works" or "sure".
+  - Email: "mike at windy city hvac dot com".
+  - Treat any offered time as your local time. Don't translate.
+  - Stay in character. Never say you are an AI.
+
+expectations:
+  - Jon offers at least one specific time during step 8.
+  - Jon successfully calls book_video_call by the end of the conversation.
+  - The slot_iso passed to book_video_call has a Central offset (-05:00 or -06:00).
+  - Jon never speaks a timezone abbreviation like "CT", "CST", or "Central".
+  - Jon stays in character — never says he is an AI.

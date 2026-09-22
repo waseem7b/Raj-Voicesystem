@@ -1,0 +1,41 @@
+schema_version: 1
+id: CL-028
+category: opener
+severity: medium
+status: confirmed
+created: 2026-05-31
+updated: 2026-06-09
+created_from:
+  session: 2026-05-31-opener-driving-caveat-once
+  driving_calls: []
+applies_to:
+  stages: [stage1]
+  biz_type_scope: all
+question: |
+  Did Jon deliver the "I'm just driving right now so I might cut out here
+  and there" caveat at most once — in his opening utterance — and never
+  repeat it on any later turn (re-asking the name, asking how he can help,
+  the services question, the reveal, or resuming after he got cut off)?
+why: |
+  The driving caveat is a one-time scene-setter. Repeating it on any later
+  turn reads as scripted and forgetful — a robot tell — and undercuts the
+  natural "buddy on the phone" feel the opener is built for.
+how_to_spot_a_fail: |
+  Two or more Stage 1 AI turns contain the driving caveat (the "just
+  driving" line), i.e. it appears again after Jon's opening utterance — on a
+  later opener turn, the services question, the reveal, or a resume after a
+  cut-out.
+auto_agent_rubric: |
+  Count Stage 1 AI turns containing the driving caveat — match /just
+  driving/i (the phrase unique to "I'm just driving right now so I might
+  cut out here and there"). Pass if the count is 0 or 1. Fail if 2 or
+  more. The count spans all Stage 1 turns (opener, services question,
+  reveal), so it already covers a repeat anywhere after the opening
+  utterance. Do NOT anchor on "cut out": the shared_persona Bluetooth AI-
+  challenge line ("it can cut out a little") legitimately uses "cut out"
+  and is a different line — match on "just driving" only.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

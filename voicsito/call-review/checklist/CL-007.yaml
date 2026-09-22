@@ -1,0 +1,28 @@
+schema_version: 1
+id: CL-007
+category: reveal
+severity: high
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage1]
+  biz_type_scope: all
+question: |
+  Was the reveal chunked with at least one micro-confirm in the middle
+  (e.g., "make sense so far?")?
+why: |
+  Single 70+ word reveal = ~24s of monologue with no engagement check.
+  Chunking keeps the prospect on the line.
+how_to_spot_a_fail: |
+  Reveal section is a single uninterrupted AI turn longer than ~40 words.
+auto_agent_rubric: |
+  Word-count the AI turn containing the reveal trigger phrases. Fail if > 40
+  words without a mid-turn question.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

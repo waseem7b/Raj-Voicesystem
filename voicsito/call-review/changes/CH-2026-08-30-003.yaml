@@ -1,0 +1,48 @@
+schema_version: 1
+id: CH-2026-08-30-003
+created: 2026-08-30T21:24
+session: 2026-08-30-ashley-emdash-sentence-ends
+driven_by:
+  observations: []
+  checklist_items: [CL-033]
+prompt_file: src/agent/prompts/stage1_confirm.py
+stage: demo_confirmation
+section: "Step 4 locked-in anchors — comma markers moved to sentence boundaries to match the persona rule"
+prompt_file_sha256_before: "a232eddb95068a0b4ea21ba9dc5091c81fc43d1072b63dc4f20af2f23a99576c"
+prompt_file_sha256_after: "96191d15a66a527e8a4f77746d1b29576f618f138a9b8d36ba355e8accf4d49c"
+escape_reason: ""
+hypothesis: |
+  The owner specified the exact placement he wants (2026-08-30, verbatim), with
+  the marker at sentence boundaries instead of before commas and four em dashes
+  instead of three. Hypothesis: a marker written AFTER a full stop lands at the
+  START of the next TTS chunk rather than the END of the current one. Vapi
+  splits chunks on `. ! ?`; every previously observed vocalisation
+  ("with John J. P.", "later, V", "Google Meet, like,") occurred at a chunk
+  END. A leading-edge marker is an untested position, and it is the only
+  placement that can produce a beat between sentences at all — the comma
+  position demonstrably cannot.
+
+expected_outcome:
+  metric: "sentence-boundary beats present AND zero vocalised markers"
+  direction: "beats appear between sentences; no invented words at marker positions"
+  magnitude: "all 4 marker positions silent and audible on the reminder call"
+  verify_after_n_calls: 1
+before: |
+  Three markers, all before commas: 'together for it ———,', 'comes up ———,',
+  'get you moved ———,'.
+after: |
+  Two markers at sentence boundaries: 'I'll let him know. ————' and
+  'just text me okay? ————'. NOTE: the owner specified placement for the REMINDER
+  script only; these confirm-script positions are the reviewer's mirror of that
+  pattern and need his sign-off. Left unchanged the persona would contradict
+  these anchors.
+word_changes_attempted: false
+deployed: true
+deployed_at: 2026-08-31T04:33
+reference_point: "git tag ashley-pre-emdash-sentence-ends"
+verify_by: "One live reminder call. Pull the gzipped log, compare raw completionText marker positions against the Deepgram assistant-channel finals per CL-033."
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

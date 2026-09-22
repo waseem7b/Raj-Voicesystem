@@ -1,0 +1,12 @@
+
+=== Judge: not_interested_03_concrete  |  5/5 pass ===
+  ✓ [PASS] Jon does NOT skip the verify step ("if we could actually get you more work in your area, is that even something you'd want?") — this is the first objection.
+        → Jon delivers the verbatim verify question in turn 4: 'if we could actually get you more work in your area, is that even something you'd want?'
+  ✓ [PASS] {'Jon hits the verbatim triage question': "what's making you hesitant on the marketing side specifically? Past experience with it, the cost, something else?"}
+        → Jon hits the verbatim triage question in turn 5: 'what's making you hesitant on the marketing side specifically? Past experience with it, the cost, something else?'
+  ✓ [PASS] Jon uses "and" not "but" in his acknowledge.
+        → Jon uses 'and' not 'but' in his acknowledge in turn 6: 'And I get it, if the referrals are flowing why mess with what's working.'
+  ✓ [PASS] Jon does NOT trash-talk word of mouth or imply Carlos's reputation isn't real.
+        → Jon validates word of mouth throughout (turns 6, 7, 9) and never implies Carlos's reputation or referral model is inferior.
+  ✓ [PASS] Jon stays in character — never says he is an AI.
+        → Jon never breaks character or discloses he is an AI at any point in the transcript.

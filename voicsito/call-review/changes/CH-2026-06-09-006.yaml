@@ -1,0 +1,47 @@
+schema_version: 1
+id: CH-2026-06-09-006
+created: 2026-06-09T00:05
+session: 2026-06-09-opener-business-advance-driving-harden
+driven_by:
+  observations: []
+  checklist_items: [CL-032]
+prompt_file: src/agent/prompts/stage2_qualify.py
+stage: stage2
+section: "Discovery questions — six trimmed to five (capacity question dropped); handoff fields referral_dependence/capacity_for_more -> lead_source/job_volume; SSML break timing added"
+prompt_file_sha256_before: "c52d493abe9beb725474ee41523792f636ae52b8b53b91e1dd492bd7194b1cf8"
+prompt_file_sha256_after: "285dc5b37a946900cafd3d3baa08aaf3321c7cc3611cb47bd2ae5b3c3fcb5e69"
+escape_reason: ""
+hypothesis: |
+  BACKFILL — not authored this session. stage2_qualify.py carried an
+  uncommitted working-tree change with no ledger entry; the sync gate did not
+  flag it because stage2's only prior entry (CH-2026-05-20-004, bootstrap) has
+  an escape_reason that suppresses the sha check. Recorded here so the deploy is
+  tracked and the gate strictly covers stage2 going forward. Factual delta:
+  discovery questions reduced from six to five (the "if you took on more work,
+  would you have to hire on / could your current crew handle it" capacity
+  question removed); the handoff payload changed from
+  {referral_dependence, capacity_for_more} to {lead_source, job_volume}; SSML
+  <break> timing markers added inside several question lines. Review rationale
+  for the trim was not captured in-session — paired with provisional CL-032.
+expected_outcome:
+  metric: ""
+  direction: ""
+  magnitude: ""
+  verify_after_n_calls: 0
+before: |
+  Six discovery questions; Q6 = "If you took on more work, would you have to
+  hire on, or could you handle more jobs with your current crew?"; handoff
+  passes referral_dependence + capacity_for_more.
+after: |
+  Five discovery questions (capacity Q6 removed); handoff passes lead_source +
+  job_volume; SSML break timing added to questions 2-4.
+word_changes_attempted: true
+deployed: true
+deployed_at: 2026-06-09T18:25
+reference_point: docs/reference-points/2026-06-09-opener-business-advance-driving-harden/
+verify_by: "operator confirm: is the five-question set + lead_source/job_volume handoff the intended Stage 2 contract? (Downstream-dependency half RESOLVED 2026-06-09: traced handoff extract_vars + Stage 3 prompt + src/webhooks — nothing references referral_dependence/capacity_for_more; push_squad variableExtractionPlan updated to lead_source/job_volume consistently; Stage 3 only templates {{city}}/{{first_name}}. No booking break.)"
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

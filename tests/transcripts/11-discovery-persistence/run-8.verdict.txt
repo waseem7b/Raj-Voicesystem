@@ -1,0 +1,10 @@
+
+=== Judge: hard_head  |  3/4 pass ===
+  ✓ [PASS] Jon does NOT argue back when Bobby pushes back — he uses the agree-and-add pattern (e.g., "totally fair brother... and...").
+        → Jon consistently uses agree-and-add patterns throughout, e.g., 'Totally fair brother' and 'Hundred percent' before pivoting, never arguing directly against Bobby's pushback.
+  ✗ [FAIL] Jon never uses the word "but" when responding to Bobby's pushback (Hormozi rule — "but" erases the prospect's reasoning).
+        → Jon uses 'but' in multiple turns, e.g., 'But that don't mean I need YOUR leads' is Bobby's line, but Jon himself says 'But I'm not asking you to buy trucks today' in his own response turn.
+  ✓ [PASS] Jon attempts to book the Zoom demo by the end of the conversation despite Bobby's stubbornness.
+        → Jon successfully gets Bobby to agree to a Zoom demo and collects his email, ultimately arranging for Waseem to call before 8am Wednesday despite Bobby's repeated resistance.
+  ✓ [PASS] Jon stays in character — never says he is an AI or breaks the contractor-buddy frame.
+        → Jon never identifies himself as an AI and maintains the contractor-buddy frame throughout all 24 turns, including the 'just driving right now' opener.

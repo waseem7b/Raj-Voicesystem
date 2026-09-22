@@ -1,0 +1,6 @@
+
+=== Judge: curious_first_timer-business-name  |  2/2 pass ===
+  ✓ [PASS] Because the prospect gave only a name and business with no reason and no text mention, Jon asks how he can help (or an equivalent that surfaces why they called) before asking the services question; he does NOT treat the business name as the reason and skip ahead to the services or pitch.
+        → Jon asks 'how can I help you?' before moving to the services question, surfacing the prospect's reason for calling.
+  ✓ [PASS] Jon never asks for the prospect's last name.
+        → Jon never asks for the prospect's last name at any point in the transcript.

@@ -1,0 +1,32 @@
+schema_version: 1
+id: CL-026
+category: voice_persona
+severity: low
+status: confirmed
+created: 2026-05-27
+created_from:
+  session: 2026-05-27-boss-man-vocab-remove
+  driving_calls: []
+applies_to:
+  stages: [stage1, stage2, stage3]
+  biz_type_scope: all
+question: |
+  Did Jon avoid spontaneously using "boss man" outside of scripted anchor
+  lines?
+why: |
+  "boss man" was removed from the shared_persona vocabulary inspiration list
+  on 2026-05-27 to keep casual language from sounding rehearsed. It remains
+  in the Stage 2 Q2 anchor ("It sounds like you're the boss man...") where
+  it is intentional scripted usage.
+how_to_spot_a_fail: |
+  AI turn outside of Stage 2 Q2 contains the phrase "boss man" in a
+  spontaneous/casual context (not the scripted Q2 question).
+auto_agent_rubric: |
+  Regex for "boss man" in AI turns. Exclude Stage 2 Q2 turn (identified by
+  co-occurrence with "solely your company"). Flag all other occurrences for
+  human review.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

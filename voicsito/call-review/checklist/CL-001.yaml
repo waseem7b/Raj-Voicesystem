@@ -1,0 +1,31 @@
+schema_version: 1
+id: CL-001
+category: voice_tts
+severity: medium
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage1, stage2, stage3]
+  biz_type_scope: all
+question: |
+  Did Jon's voice play cleanly throughout the call (no audio glitches,
+  clipping, dropouts, or robotic moments)?
+why: |
+  Audio artifacts kill trust in the first 5 seconds. Seed item — added at
+  system launch as part of the standing rubric.
+how_to_spot_a_fail: |
+  Listen to the recording for clicks, gaps mid-word, sudden volume drops,
+  pitch artifacts. Transcript alone is insufficient — recording must be
+  spot-checked when audio is suspected.
+auto_agent_rubric: |
+  Judge cannot score this from transcript alone. Defer to human until audio
+  classifier is available. For automated path: require operator to mark
+  pass/fail/not_applicable per call.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

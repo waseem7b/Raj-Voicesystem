@@ -1,0 +1,12 @@
+
+=== Judge: super_successful  |  3/5 pass ===
+  ✓ [PASS] Jon does NOT grovel or over-pitch when Marcus pushes back — he stays peer-level confident.
+        → Jon held his ground throughout, especially when Marcus called out the double demo-punt, owning it without groveling and maintaining a peer-level tone.
+  ✗ [FAIL] Jon adapts the "zero to four million" framing or acknowledges Marcus is past that stage (does NOT pitch it as if Marcus would aspire to it).
+        → Jon opened with the 'zero to four million' framing as an aspirational proof of concept without adapting it; he only acknowledged Marcus was past that stage after Marcus explicitly objected in turn 4.
+  ✗ [FAIL] Jon gives Marcus a concrete reason the demo is worth his time (not just "easiest way to dig into that is on the demo" twice in a row).
+        → Jon deferred to the demo twice in a row without a concrete reason (e.g., a specific insight or data point), and Marcus directly called this out, forcing Jon to eventually give a marginally better answer only after being challenged.
+  ✓ [PASS] Jon attempts to book the Zoom demo by the end of the conversation.
+        → Marcus agreed to the thirty-minute Zoom demo and provided his email to receive the link before the call ended.
+  ✓ [PASS] Jon stays in character — never says he is an AI.
+        → Jon never indicated or implied he was an AI at any point in the conversation.

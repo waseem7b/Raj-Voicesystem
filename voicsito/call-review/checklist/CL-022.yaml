@@ -1,0 +1,30 @@
+schema_version: 1
+id: CL-022
+category: hang_up
+severity: critical
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage1, stage2, stage3]
+  biz_type_scope: all
+question: |
+  Did Jon avoid hanging up before the prospect had clearly closed the
+  conversation?
+why: |
+  Early hang-ups lose recoverable prospects. The endCall tool has a
+  rejectionPlan for exactly this — verify it fired correctly.
+how_to_spot_a_fail: |
+  endedReason="assistant-ended-call" but the last prospect turn does NOT
+  contain a close signal (bye, talk soon, thanks, not interested, retiring,
+  wrong number, etc.).
+auto_agent_rubric: |
+  If ended_reason="assistant-ended-call", last prospect turn must match the
+  rejectionPlan whitelist regex in push_squad.py:153-167.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

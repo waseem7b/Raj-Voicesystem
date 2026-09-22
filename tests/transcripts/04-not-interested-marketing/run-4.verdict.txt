@@ -1,0 +1,12 @@
+
+=== Judge: not_interested_04_landscaping  |  3/5 pass ===
+  ✗ [FAIL] Jon does NOT skip the verify step ("if we could actually get you more work in your area, is that even something you'd want?") — this is the first objection.
+        → Jon combined the verify step and the triage question into a single turn (turn 4) without waiting for a response to the verify question first, effectively skipping the standalone verify step.
+  ✗ [FAIL] {'Jon hits the verbatim triage question': "what's making you hesitant on the marketing side specifically? Past experience with it, the cost, something else?"}
+        → Jon combined the triage question with the verify step in one breath at turn 4 rather than asking it as a distinct follow-up after getting a response to the verify question.
+  ✓ [PASS] Jon uses "and" not "but" in his acknowledge.
+        → Jon uses 'and' not 'but' in his acknowledge at turn 5 ('And honestly? You're not wrong to be skeptical').
+  ✓ [PASS] Jon does NOT argue Jake's previous agency was wrong or call Jake naive for hiring them.
+        → Jon validates Jake's experience and never argues the previous agency was wrong or implies Jake was naive for hiring them.
+  ✓ [PASS] Jon stays in character — never says he is an AI.
+        → Jon never breaks character or indicates he is an AI throughout the transcript.

@@ -1,0 +1,56 @@
+schema_version: 1
+id: CH-2026-06-04-003
+created: 2026-06-04T00:00
+session: 2026-06-04-closing-stall-once
+driven_by:
+  observations: []
+  checklist_items: [CL-031]
+prompt_file: src/agent/prompts/shared_persona.py
+stage: all
+section: "Anti-recitation rules — first-name / business / trade / city frequency"
+prompt_file_sha256_before: "045580904a6d660cb331c94037a10deecefa108dd35564a353763e99992fb797"
+prompt_file_sha256_after: "f6c1bcf009d0e23bec8e7f8e8a34677a2a800ab5d5acbba1974f5cf66637472d"
+escape_reason: ""
+hypothesis: |
+  RETROACTIVE BACKFILL — not authored this session. shared_persona.py was
+  modified in the working tree (uncommitted) after CH-2026-05-31-002 with no
+  paired ledger entry, leaving check_checklist_sync red. This entry records
+  it, restoring sync. Discovered during the 2026-06-04 closing-stall session;
+  related to the untracked tests/transcripts/13-name-frequency/ work.
+
+  Change: a new bullet was added to the anti-recitation list capping how often
+  Jon names the prospect. Rationale (as understood): repeating the prospect's
+  first name — and their business, trade, city — every turn reads as scripted
+  and salesy; using the first name about twice per call (once on capture, once
+  near the close), leaving it out of greetings and the turns in between, and
+  referencing the other CRM facts once where relevant, keeps the delivery
+  natural. The bullet's wording is the operator's and was preserved verbatim.
+expected_outcome:
+  metric: first_name_overuse_rate
+  direction: down
+  magnitude: medium
+  verify_after_n_calls: 10
+before: |
+  - **Never use the exact same opening word two turns in a row.** If you opened with "Yeah", open the next one with "Got it" or "Right" or "Hundred percent" or "Hmm".
+  - **Never read a list out loud.** If you have three things to say, say one, wait, say the next.
+after: |
+  - **Never use the exact same opening word two turns in a row.** If you opened with "Yeah", open the next one with "Got it" or "Right" or "Hundred percent" or "Hmm".
+  - **Use the prospect's first name about twice the whole call — once when you first get it, once near the close.** Leave it out of the turns in between; do not open turns by greeting them by name. Drop it mid-call only if it lands and you haven't used it in the last few turns. Same with their business, trade, and city — reference once when relevant, not every line.
+  - **Never read a list out loud.** If you have three things to say, say one, wait, say the next.
+word_changes_attempted: true
+deployed: true
+deployed_at: 2026-06-09T18:25
+reference_point: docs/reference-points/2026-06-09-opener-business-advance-driving-harden/
+verify_by: |
+  Run a multi-turn sim across stages (or pull the next 10 inbound calls). For
+  each transcript:
+  1. The prospect's first name appears in at most about two AI turns — once
+     near capture, once near the close.
+  2. No AI turn opens by greeting the prospect by name ("Hey Mike, ...").
+  3. Business / trade / city are referenced once where relevant, not echoed on
+     every turn.
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

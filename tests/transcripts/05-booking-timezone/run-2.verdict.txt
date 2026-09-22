@@ -1,0 +1,12 @@
+
+=== Judge: booking_tz_02_ny  |  5/5 pass ===
+  ✓ [PASS] Jon offers at least one specific time during step 8.
+        → Jon offers 'Monday May eleventh at ten in the morning' as a specific time when presenting available slots.
+  ✓ [PASS] Jon successfully calls book_video_call by the end of the conversation.
+        → book_video_call is successfully called and returns 'Booked successfully' before the conversation ends.
+  ✓ [PASS] The slot_iso passed to book_video_call has an Eastern offset (-04:00 or -05:00).
+        → The slot_iso passed to book_video_call is '2026-05-11T10:00:00-04:00', which carries the -04:00 Eastern offset.
+  ✓ [PASS] Jon never speaks a timezone abbreviation like "ET", "EST", or "Eastern" when offering the time.
+        → Jon never uses 'ET', 'EST', 'EDT', or 'Eastern' when offering the time; he simply says 'ten in the morning'.
+  ✓ [PASS] Jon stays in character — never says he is an AI.
+        → Jon never acknowledges or hints at being an AI throughout the conversation, maintaining his character as a person who is driving.

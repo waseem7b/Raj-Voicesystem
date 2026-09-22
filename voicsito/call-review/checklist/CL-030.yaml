@@ -1,0 +1,55 @@
+schema_version: 1
+id: CL-030
+category: opener
+severity: medium
+status: confirmed
+created: 2026-06-04
+updated: 2026-06-09
+created_from:
+  session: 2026-06-04-opener-text-reason-vs-business
+  driving_calls: []
+applies_to:
+  stages: [stage1]
+  biz_type_scope: all
+question: |
+  In Step 1, when the prospect gave any context for the call — a text mention,
+  their business name, or the trade they do — did Jon treat it as established,
+  skip "how can I help", and move toward Step 2 (grabbing the name first only
+  if it was still missing)? And when the prospect gave only a name with no
+  context at all, did Jon still ask how he can help before leaving Step 1?
+why: |
+  A returning contractor who references our text, names their business, or says
+  what they do has already given Jon enough to move the call forward. Re-asking
+  "how can I help" there is a robot tell — it reads as Jon not listening. Only a
+  bare name with zero context leaves the reason genuinely unknown, which is the
+  one case that still needs "how can I help". This supersedes the 2026-06-04
+  reading, under which a bare business name was NOT treated as a reason and
+  routed to "how can I help"; per operator (2026-06-09), a business name or a
+  stated trade now advances the call.
+how_to_spot_a_fail: |
+  FAIL A: the prospect referenced the text, named their business, or stated
+  their trade, but Jon still re-asked the reason ("how can I help you", "what's
+  going on", "what can I do for you") in a later Step 1 turn instead of advancing
+  toward Step 2. This INCLUDES the case where the prospect gave their name and
+  the context in the SAME opening utterance (e.g. "I got your text, it's Mike" or
+  "this is Mike from ABC Epoxy") — a "how can I help" there is a fail. Asking once
+  for the NAME is allowed and is not a fail.
+  FAIL B: the prospect gave only a name with no text mention, no business name,
+  and no stated trade, but Jon advanced into Step 2 without asking how he can
+  help.
+auto_agent_rubric: |
+  Inspect Jon's Step 1 turns against the prospect's Step 1 turns.
+  - If the prospect's words reference the text (/text|texted|message/i), name a
+    business, or state a trade (e.g. "I do roofing", "we're an epoxy company"):
+    PASS only if no later Step 1 AI turn re-asks the reason (no "how can I help",
+    "what's going on", "what can I do for you") and Jon moves toward the Step 2
+    services question. Asking once for the NAME is allowed and is not a fail.
+  - Else if the prospect gave only a name with no context (no text reference, no
+    business name, no stated trade): PASS only if Jon asks how he can help before
+    leaving Step 1. FAIL if Jon jumps to the Step 2 services question without it.
+  - Else: mark not_applicable.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

@@ -1,0 +1,52 @@
+schema_version: 1
+id: CH-2026-06-09-002
+created: 2026-06-09T00:01
+session: 2026-06-09-opener-business-advance-driving-harden
+driven_by:
+  observations: []
+  checklist_items: [CL-028]
+prompt_file: src/agent/prompts/stage1_inbound_texts.py
+stage: stage1
+section: "Step 1 — driving caveat one-time rule hardened (explicit prohibition; scope broadened to all later turns + resume-after-cutoff)"
+prompt_file_sha256_before: "29bda3be759880f4bfb2f27129cd178b4ac00c7d9817e968fbc5d03fe373faf1"
+prompt_file_sha256_after: "326f157892fb745309b26adf6c5898d1d62e0b48feb2b7937dff504ca4b6c907"
+escape_reason: ""
+hypothesis: |
+  Operator (2026-06-09) reports Jon still repeating the driving caveat. The
+  one-time rule (CH-2026-05-31-001 / CL-028) is already live (confirmed in the
+  2026-06-08 Vapi pull) but is purely positive-framed ("belongs to this opening
+  utterance only ... speak without it") and scoped only to "any later Step 1
+  turn". GPT-4.1 reads literally and no longer infers implicit prohibitions, so
+  it re-renders the caveat — most likely on a resume after a cut-out, or on the
+  services-question / reveal turns the old scope didn't name. Hardened with an
+  explicit prohibition for the named failure mode ("Once you have said it, do
+  not say it again on any later turn") and broadened the enumerated turns to
+  include the services question, the reveal, and resuming after a cut-out. The
+  locked caveat phrase is untouched; positive lead retained, surgical negative
+  added per prompt-update-discipline principle 3.
+expected_outcome:
+  metric: driving_caveat_repeat_rate
+  direction: down
+  magnitude: large
+  verify_after_n_calls: 10
+before: |
+  **The driving caveat is a one-time line.** "I'm just driving right now so I
+  might cut out here and there" belongs to this opening utterance only. On any
+  later Step 1 turn — re-asking for the name, or asking how you can help —
+  speak without it.
+after: |
+  **The driving caveat is a one-time line.** "I'm just driving right now so I
+  might cut out here and there" belongs to this opening utterance only. Once
+  you have said it, do not say it again on any later turn — re-asking for the
+  name, asking how you can help, the services question, the reveal, or resuming
+  after you got cut off. Speak those without it.
+word_changes_attempted: false
+deployed: true
+deployed_at: 2026-06-09T18:25
+reference_point: docs/reference-points/2026-06-09-opener-business-advance-driving-harden/
+verify_by: "sim: multi-turn Stage 1 (greeting-only -> name, then services + reveal) — 'just driving' must appear at most once across all Stage 1 turns, including after an interruption/resume"
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

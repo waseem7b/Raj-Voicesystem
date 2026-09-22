@@ -1,0 +1,33 @@
+{
+  "artifacts": [
+    {
+      "artifact_type": "contact",
+      "created_at": "2026-05-12T03:30:57.199146+00:00",
+      "history": [
+        {
+          "at": "2026-05-12T03:30:57.199659+00:00",
+          "reason": "canary test \u2014 never actually created",
+          "state": "deleted"
+        }
+      ],
+      "id": "fake-contact-id-1234",
+      "markers": {
+        "email": "vt-dbc16c0d-canary@voicsito-tests.invalid",
+        "first_name": "VTEST_dbc16c0d",
+        "phone": "+155501994775",
+        "tag": "voicsito-test-artifact"
+      },
+      "notes": "crm:main",
+      "parent_artifact_id": null,
+      "slot_iso": null,
+      "state": "deleted",
+      "updated_at": "2026-05-12T03:30:57.199656+00:00"
+    }
+  ],
+  "completed_at": "2026-05-12T03:30:57.199870+00:00",
+  "label": "canary test of helper infra",
+  "run_id": "vt-20260512-033057-dbc16c0d",
+  "run_state": "done",
+  "started_at": "2026-05-12T03:30:57.198834+00:00",
+  "version": 1
+}

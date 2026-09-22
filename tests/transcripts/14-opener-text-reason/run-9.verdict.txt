@@ -1,0 +1,8 @@
+
+=== Judge: curious_first_timer-text-no-name  |  3/3 pass ===
+  ✓ [PASS] Because the prospect did not give a name, Jon asks for the name exactly once and then advances — he does not loop on or repeatedly ask for the name.
+        → Jon asks for the name exactly once (turn 1) and immediately moves on after receiving it.
+  ✓ [PASS] Jon treats the text mention as the reason for the call — he does NOT re-ask why the prospect is calling ("how can I help you", "what's going on", or "what's this about").
+        → Jon treats the text as the reason for the call and never re-asks why the prospect is calling.
+  ✓ [PASS] Jon never apologizes for the text or calls it misleading.
+        → Jon never apologizes for the text or calls it misleading at any point in the transcript.

@@ -1,0 +1,1 @@
+persona hostile_skeptic has no 'expectations:' field — add a list of plain-English checks to grade against

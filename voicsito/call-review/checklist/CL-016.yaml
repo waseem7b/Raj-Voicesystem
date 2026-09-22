@@ -1,0 +1,28 @@
+schema_version: 1
+id: CL-016
+category: booking
+severity: critical
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage3]
+  biz_type_scope: all
+question: |
+  Was the prospect's email captured BEFORE the book_video_call tool call
+  fired?
+why: |
+  Calendar invites need email. Booking without email = no invite = no show.
+how_to_spot_a_fail: |
+  book_video_call tool call appears in transcript before
+  update_prospect_info(email=...) or any prospect email utterance.
+auto_agent_rubric: |
+  Tool-call sequence inspection: update_prospect_info with email arg OR
+  prospect-said-email must precede book_video_call.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

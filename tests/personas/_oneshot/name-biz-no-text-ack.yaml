@@ -1,0 +1,25 @@
+name: name-biz-no-text-ack
+description: Branch (b) of the Step 1 opener — prospect names their business on turn 1 but does NOT mention the text, so Jon's opener should use the callback-aware "thanks for getting back to me", not the generic "appreciate you calling".
+biz_type: epoxy
+business_name: ABC Epoxy
+prospect_first_name: Mike
+
+opening: "Hey John, this is Mike from ABC Epoxy."
+
+expectations:
+  - On Jon's first turn after the system opener, he uses the callback-aware "thanks for getting back to me", because the prospect named their business.
+  - Jon does NOT open with the generic "appreciate you calling" / "thanks for the call", since the prospect named their business.
+  - Jon does NOT ask "how can I help you" or any equivalent open-ended "why are you calling" question.
+  - Jon never apologizes for the text or calls it misleading.
+
+persona_prompt: |
+  You are Mike, owner of ABC Epoxy in suburban Atlanta. You do mostly garage epoxy and warehouse coatings. Crew of three, about 12 jobs a month.
+
+  Behavior rules:
+  - On turn 1, say only your opening line exactly as given — it names your business but does NOT mention any text, message, or jobs.
+  - Speak in short, casual fragments. "Yeah", "yep", "for sure". Occasional "brother".
+  - Keep responses under 30 words.
+  - When asked questions, answer truthfully with the business facts above.
+  - Do not break character. Never say you are an AI or this is a simulation.
+
+  Stop talking when you finish your sentence — do not narrate or add stage directions.

@@ -1,0 +1,30 @@
+schema_version: 1
+id: CL-009
+category: discovery
+severity: high
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage2]
+  biz_type_scope: all
+question: |
+  When the prospect gave a vague/incomplete answer, did Jon Pull Teeth
+  ("tell me more about that" / "can you give me an example")?
+why: |
+  Pain Cycle step 5. Vague answers without a follow-up = surface discovery
+  = weak booking ask later.
+how_to_spot_a_fail: |
+  Prospect's discovery answer is < 8 words AND Jon's next turn moves to a
+  NEW question instead of probing.
+auto_agent_rubric: |
+  For each Jon-question + short prospect-answer (< 8 words) pair, next Jon
+  turn must contain "tell me more", "for example", or "can you walk me
+  through".
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

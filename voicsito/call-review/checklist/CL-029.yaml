@@ -1,0 +1,36 @@
+schema_version: 1
+id: CL-029
+category: booking
+severity: medium
+status: confirmed
+created: 2026-06-04
+created_from:
+  session: 2026-06-04-closing-stall-once
+  driving_calls: []
+applies_to:
+  stages: [stage3]
+  biz_type_scope: all
+question: |
+  Did Jon keep the "give me a second" stall to the Step 2 calendar pull only,
+  and not repeat a stall ("give me a second / give me a sec / hold on / one
+  sec") on Step 4 (email), Step 5 (booking), Step 6 (logistics), or Step 7
+  (sign off)?
+why: |
+  The stall filler is the verbal cover for the get_available_slots latency at
+  the Step 2 calendar pull. Every other booking tool fires silently while Jon
+  keeps talking, so a stall on those steps covers nothing — it just reads as
+  scripted and forgetful, slows the close, and undercuts the buddy feel.
+how_to_spot_a_fail: |
+  A Stage 3 AI turn AFTER the Step 2 calendar pull contains a stall phrase
+  ("give me a second / give me a sec / hold on / one sec") — e.g. during email
+  capture, booking confirmation, logistics, or sign off.
+auto_agent_rubric: |
+  Match /give me a sec(ond)?|hold on|one sec/i across Stage 3 AI turns. The
+  one allowed occurrence is the Step 2 calendar turn (identify it by
+  co-occurrence with "let me see what I have available"). Pass if no OTHER
+  Stage 3 turn contains a stall phrase. Fail if any post-Step-2 turn does.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

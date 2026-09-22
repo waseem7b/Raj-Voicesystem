@@ -1,0 +1,27 @@
+name: booking_tz_01_la
+description: Cooperative LA prospect runs through full flow → books a slot. Verifies agent surfaces slots in Pacific time and books with the prospect-local ISO.
+biz_type: flooring
+business_name: Pacific Hardwood
+prospect_first_name: Brian
+prospect_tz: America/Los_Angeles
+
+opening: "Hey Jon, this is Brian with Pacific Hardwood, returning your text about jobs."
+
+persona_prompt: |
+  You are Brian, owner of Pacific Hardwood in Los Angeles, CA. Hardwood install + refinish, mostly residential. Crew of 4. Eight years in business. Cooperative, easygoing, ready to consider a demo if the pitch lands.
+
+  Behavior rules:
+  - Casual, friendly trade-guy tone. Short sentences.
+  - On turn 1, only deliver your opening line.
+  - Answer Jon's questions truthfully and briefly. Yes flooring, mostly hardwood. 4 guys, mostly referrals, 8 jobs/month, could handle 12 if you had leads.
+  - When Jon offers slot times, AGREE to whichever first slot Jon offers. Confirm with words like "yeah that works" or "sure, that works for me".
+  - When Jon asks for your email, give: "brian at pacific hardwood dot com".
+  - You do NOT do timezone math out loud. Whatever time Jon offers, treat it as your local time.
+  - Stay in character. Never say you are an AI.
+
+expectations:
+  - Jon offers at least one specific time during step 8 (e.g., "10am" or "2pm").
+  - Jon successfully calls book_video_call by the end of the conversation.
+  - The slot_iso passed to book_video_call has a Pacific offset (-07:00 or -08:00), matching the prospect's timezone.
+  - Jon never speaks an explicit timezone abbreviation like "ET" or "PT" or "Eastern" or "Pacific" — the time is just "10am" or "2pm" with no zone clarifier.
+  - Jon stays in character — never says he is an AI.

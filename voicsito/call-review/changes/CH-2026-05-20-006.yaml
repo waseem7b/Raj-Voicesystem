@@ -1,0 +1,73 @@
+schema_version: 1
+id: CH-2026-05-20-006
+created: 2026-05-20T22:30
+session: 2026-05-20T22-15-opener-tighten
+driven_by:
+  observations: []
+  checklist_items: [CL-005]
+prompt_file: src/agent/prompts/stage1_inbound_texts.py
+stage: stage1
+section: "Step 1 — Opening (anchor + follow-up table + Gate)"
+prompt_file_sha256_before: "d6c44f8a977a2b7875335e4ac26b689413ecd1dac9818899ae74e1b4e604634d"
+prompt_file_sha256_after: "a75a2244381de29fe60210981bb6ebcd41b431bea89a4ec9accee5a01311c404"
+escape_reason: ""
+hypothesis: |
+  Removing "how can I help you?" from Step 1 and acknowledging the
+  text-callback context proactively will reduce the bot-feel on the first
+  agent turn. Prospects who text us back already know why they called;
+  asking them is a robot tell. Expected effect: smoother first 30s,
+  higher Stage 1 → Stage 2 handoff rate, fewer early hang-ups during
+  the reveal because Jon sounded "with it" from the jump.
+expected_outcome:
+  metric: stage1_to_stage2_handoff_rate
+  direction: up
+  magnitude: small to moderate
+  verify_after_n_calls: 10
+before: |
+  **Anchor:** "Yeah, thanks for the call [first name if known]. I'm just
+  driving right now so I might cut out here and there, but..."
+
+  | What the prospect gave you | Continue the utterance with |
+  |---|---|
+  | Greeting only (no name, no reason) | "Sorry, I didn't catch your name? And how can I help you?" |
+  | Name only (no reason) | "How can I help you?" |
+  | Reason only (no name) | "Sorry, I didn't catch your name?" |
+  | Name AND a reason (text / jobs / marketing / work) | Acknowledge their reason briefly, then stop. Step 2 is your next turn. |
+
+  **Gate:** Advance to Step 2 once you have BOTH their first name AND
+  a reason for the call. A vague greeting is not a reason. If either is
+  still missing after this turn, ask the missing piece on your next
+  turn before moving to Step 2.
+after: |
+  **Anchor:** "Yeah, appreciate you calling [first name if known]. I'm just
+  driving right now so I might cut out here and there."
+
+  | What the prospect gave you | Continue the utterance with |
+  |---|---|
+  | Greeting only (no name, no reason) | "...sorry, I didn't catch your name?" |
+  | Name only (or name + business) | Nothing — stop after the anchor. Step 2 is your next turn. |
+  | Reason only (no name) | "...sorry, I didn't catch your name?" |
+  | Name AND a reason (text / jobs / marketing / work) | Acknowledge their reason briefly, then stop. Step 2 is your next turn. |
+
+  **Gate:** Advance to Step 2 once you have their first name. The reason
+  is implicit — they're calling back about the text we sent. If the
+  first name is still missing after this turn, ask for it on your
+  next turn before advancing.
+word_changes_attempted: true
+deployed: true
+deployed_at: 2026-05-26T18:14:00Z
+reference_point: docs/reference-points/2026-05-20-call-review-launch/
+verify_by: |
+  Pull next 10 inbound Stage 1 calls. For each, check transcript:
+  1. AI turns in Step 1 contain neither "how can I help" nor
+     "what can I do for you" nor "what brings you in".
+  2. When prospect gave name in their first utterance, Jon's first
+     anchor turn does NOT ask any open-ended "why are you calling"
+     question.
+  3. Handoff to Stage 2 fires on the same or next AI turn (no extra
+     elicit-the-reason turn inserted).
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

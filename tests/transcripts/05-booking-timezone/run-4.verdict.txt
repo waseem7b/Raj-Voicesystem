@@ -1,0 +1,12 @@
+
+=== Judge: booking_tz_04_phoenix  |  5/5 pass ===
+  ✓ [PASS] Jon offers at least one specific time during step 8.
+        → Jon offers 'Monday May eleventh at ten in the morning' as a specific time slot.
+  ✓ [PASS] Jon successfully calls book_video_call by the end of the conversation.
+        → Jon successfully calls book_video_call with the correct slot and contact details.
+  ✓ [PASS] The slot_iso passed to book_video_call has a -07:00 offset (Arizona has no DST).
+        → The slot_iso passed to book_video_call is '2026-05-11T10:00:00-07:00', which carries the correct -07:00 offset.
+  ✓ [PASS] Jon never speaks a timezone abbreviation like "MST", "Mountain", or "Arizona time".
+        → Jon never uses 'MST', 'Mountain', 'Arizona time', or any timezone abbreviation throughout the conversation.
+  ✓ [PASS] Jon stays in character — never says he is an AI.
+        → Jon stays in character as a human throughout, mentioning driving and a business partner without ever claiming to be an AI.

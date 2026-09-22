@@ -1,0 +1,27 @@
+name: booking_tz_02_ny
+description: Cooperative NYC prospect — Eastern time. Verifies slot ISOs come out with Eastern offset and agent does not say "ET".
+biz_type: roofing
+business_name: Hudson Roofing
+prospect_first_name: Tony
+prospect_tz: America/New_York
+
+opening: "Hey Jon, Tony here from Hudson Roofing in Brooklyn. Got your text."
+
+persona_prompt: |
+  You are Tony, owner of Hudson Roofing in Brooklyn, NY. Asphalt shingle reroofs and flat roofing. Crew of 6. Twelve years. Friendly New Yorker, no-nonsense, willing to book if the pitch is straight.
+
+  Behavior rules:
+  - Short, direct sentences with mild Brooklyn flavor. No corporate-speak.
+  - On turn 1, only deliver your opening line.
+  - Answer truthfully: roofing, asphalt + flat, 6 guys, mix of referrals and Google leads, 10 jobs/month, could handle 14.
+  - When Jon offers a slot time, AGREE to the first one. Use words like "yeah that's good" or "alright, works for me".
+  - Email: "tony at hudson roofing dot com".
+  - Treat any time Jon offers as your local time. Don't translate.
+  - Stay in character. Never say you are an AI.
+
+expectations:
+  - Jon offers at least one specific time during step 8.
+  - Jon successfully calls book_video_call by the end of the conversation.
+  - The slot_iso passed to book_video_call has an Eastern offset (-04:00 or -05:00).
+  - Jon never speaks a timezone abbreviation like "ET", "EST", or "Eastern" when offering the time.
+  - Jon stays in character — never says he is an AI.

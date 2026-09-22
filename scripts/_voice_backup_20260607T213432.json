@@ -1,0 +1,45 @@
+{
+  "261bf1a0-3527-4fcb-956c-b6e227d0bae1": {
+    "model": "eleven_turbo_v2_5",
+    "speed": 1,
+    "style": 1,
+    "voiceId": "UNCsznDbk5vRePab5lcd",
+    "provider": "11labs",
+    "stability": 0.3,
+    "similarityBoost": 1,
+    "useSpeakerBoost": true
+  },
+  "46e47e95-674a-4624-9029-69bb39c4daf0": {
+    "model": "eleven_turbo_v2_5",
+    "speed": 0.92,
+    "style": 1,
+    "voiceId": "UNCsznDbk5vRePab5lcd",
+    "provider": "11labs",
+    "stability": 0.3,
+    "similarityBoost": 1,
+    "useSpeakerBoost": true,
+    "enableSsmlParsing": true
+  },
+  "7b2666e0-154d-4c85-82f0-07b4c51ad264": {
+    "model": "eleven_turbo_v2_5",
+    "speed": 0.92,
+    "style": 1,
+    "voiceId": "UNCsznDbk5vRePab5lcd",
+    "provider": "11labs",
+    "stability": 0.3,
+    "similarityBoost": 1,
+    "useSpeakerBoost": true,
+    "enableSsmlParsing": true
+  },
+  "7600c2b6-d669-4f2e-8387-e371b0c193d4": {
+    "model": "eleven_turbo_v2_5",
+    "speed": 0.92,
+    "style": 1,
+    "voiceId": "UNCsznDbk5vRePab5lcd",
+    "provider": "11labs",
+    "stability": 0.3,
+    "similarityBoost": 1,
+    "useSpeakerBoost": true,
+    "enableSsmlParsing": true
+  }
+}

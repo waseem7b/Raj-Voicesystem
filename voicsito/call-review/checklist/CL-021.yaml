@@ -1,0 +1,40 @@
+schema_version: 1
+id: CL-021
+category: pacing
+severity: medium
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage1, stage2, stage3]
+  biz_type_scope: all
+question: |
+  When the prospect interrupted, did Jon yield (stop talking) rather than
+  talk over — and on his next turn resume from where he was cut off rather
+  than re-reciting the anchor from the top?
+why: |
+  Talking over the prospect breaks rapport instantly. And after yielding,
+  restarting the same anchor from its opening words (re-reciting from the
+  top) sounds robotic and forgetful — resume from the cut-off point.
+how_to_spot_a_fail: |
+  Either:
+  - Vapi transcript shows overlapping turns or AI turn continuing > 2 words
+    after prospect started speaking (talk-over), OR
+  - after an interruption mid-anchor, the next AI turn restarts that anchor
+    from its opening words instead of continuing from the cut-off sentence
+    (re-recite from the top).
+auto_agent_rubric: |
+  Two checks:
+  1. Inspect Vapi's per-turn overlap metadata. Fail if overlap duration >
+     0.5s on any turn.
+  2. When an AI turn was interrupted mid-anchor, the following AI turn must
+     not begin by repeating the opening words of that same anchor. Fail if
+     the post-interruption turn re-recites the anchor from the top instead
+     of resuming from the cut-off sentence.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

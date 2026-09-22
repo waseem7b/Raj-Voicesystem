@@ -1,0 +1,48 @@
+schema_version: 1
+id: CH-2026-08-30-006
+created: 2026-08-30T21:46
+session: 2026-08-30-ashley-emdash-sentence-ends
+driven_by:
+  observations: []
+  checklist_items: [CL-033]
+prompt_file: src/agent/prompts/stage1_confirm.py
+stage: demo_confirmation
+section: "Step 4 locked-in anchors: four em dashes -> `-- --`"
+prompt_file_sha256_before: "a232eddb95068a0b4ea21ba9dc5091c81fc43d1072b63dc4f20af2f23a99576c"
+prompt_file_sha256_after: "19773e192fc8fa0a0f8ba20290acca2ecb09e8fee740fa6744833dc76a6db310"
+escape_reason: ""
+hypothesis: |
+  Owner ruled out SSML break tags for this model. ElevenLabs documents em dashes
+  as working but explicitly "less consistent than break tags", and never
+  documents a RUN of consecutive em dashes -- the documented multi-dash form is
+  `-- --` (spaced hyphen pairs). On call 01a05619 (v73, four em dashes at
+  sentence ends) two of four markers were silent and produced the intended beat,
+  while two were vocalised as "I" and "Well," -- consistent with a four-glyph
+  em-dash run being an out-of-distribution token the TTS attempts to pronounce.
+  Hypothesis: the documented `-- --` form is in-distribution and stays silent at
+  all four positions while still producing the beat.
+  Note the handoff records plain `----` (four consecutive hyphens, unspaced) as
+  "silent -- swallowed, no pause and no harm". `-- --` is a different string and
+  is the form the vendor documents; if it also swallows silently, the marker
+  approach is exhausted and the next lever is chunkPlan.minCharacters.
+
+expected_outcome:
+  metric: "vocalised markers per call"
+  direction: "down"
+  magnitude: "0 of 4 spoken (was 2 of 4 on 01a05619)"
+  verify_after_n_calls: 1
+before: |
+  Marker was ` ————` (space + four em dashes) at four sentence-end positions.
+after: |
+  Marker is ` -- --` (space, two hyphens, space, two hyphens) at the same four
+  positions. Placement unchanged; only the glyph changed.
+word_changes_attempted: false
+deployed: true
+deployed_at: 2026-08-31T04:46
+reference_point: "git tag ashley-pre-multidash"
+verify_by: "One live reminder call. Compare raw completionText marker positions against the Deepgram assistant-channel finals per CL-033."
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

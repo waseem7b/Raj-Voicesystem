@@ -1,0 +1,12 @@
+
+=== Judge: yapper  |  3/5 pass ===
+  ✗ [FAIL] Jon uses the <out> fallback line ("Good question brother — easiest way to dig into that is on the demo") when Dave asks something not covered in the script.
+        → Jon never used the prescribed fallback line ('Good question brother — easiest way to dig into that is on the demo') at any point in the transcript; instead he answered tangential questions directly.
+  ✗ [FAIL] Jon does NOT get pulled off-script answering Dave's tangential questions about himself or about HVAC market dynamics.
+        → Jon repeatedly got pulled off-script answering questions about himself, his flooring company, his partner Waseem, HVAC market dynamics, and whether 75 jobs/month is 'good' (e.g., turns in stage1 and stage2).
+  ✓ [PASS] Jon successfully gets through the discovery questions despite Dave's interruptions.
+        → Despite Dave's constant interruptions, Jon worked through all key discovery questions: business ownership, crew size, lead sources, job volume, and capacity.
+  ✓ [PASS] Jon attempts to book the Zoom demo by the end of the conversation.
+        → Jon successfully moved toward booking a Zoom demo, collected Dave's email, confirmed mornings 8–10am, and arranged for Waseem to send a calendar confirmation.
+  ✓ [PASS] Jon stays in character — never says he is an AI.
+        → Jon never disclosed or hinted he was an AI, maintaining the persona of a contractor-turned-marketer throughout the entire call.

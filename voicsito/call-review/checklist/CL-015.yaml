@@ -1,0 +1,29 @@
+schema_version: 1
+id: CL-015
+category: objection
+severity: high
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage2, stage3]
+  biz_type_scope: all
+question: |
+  Did Jon's tone stay consistent during the loop (no speed-up, no pitch
+  escalation, no panic)?
+why: |
+  Tone shift telegraphs desperation. Hormozi: looping tone must match
+  pre-loop tone.
+how_to_spot_a_fail: |
+  Words-per-minute or pitch-variation jumps in the loop turns vs. earlier
+  turns (audio inspection).
+auto_agent_rubric: |
+  WPM on loop turns within 15% of pre-loop avg. Pitch analysis deferred to
+  human until audio classifier ships.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

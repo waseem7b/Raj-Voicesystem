@@ -1,0 +1,64 @@
+schema_version: 1
+id: CH-2026-05-31-001
+created: 2026-05-31T00:00
+session: 2026-05-31-opener-driving-caveat-once
+driven_by:
+  observations: []
+  checklist_items: [CL-028]
+prompt_file: src/agent/prompts/stage1_inbound_texts.py
+stage: stage1
+section: "Step 1 — Opening (driving-caveat one-time rule)"
+prompt_file_sha256_before: "125a18849cd242791b2bae349f50611dd6962f7fc05bd6818f854b76dd414b2b"
+prompt_file_sha256_after: "42234ab897d487868c4bfec45c61b0211a7606dc716cea11018dbf9d8a5f83f5"
+escape_reason: ""
+hypothesis: |
+  The "I'm just driving right now so I might cut out here and there" caveat
+  is baked into the Step 1 anchor, but Step 1 can span more than one turn
+  (greeting-only -> ask name; name-only -> ask how you can help; name still
+  missing -> re-ask). With no rule scoping the caveat to the opening
+  utterance, GPT-4.1 re-renders it on each Step 1 turn, so Jon repeats it.
+  Adding an explicit one-time-delivery rule confines the caveat to the
+  first utterance. Structural only — no change to the caveat wording.
+  Expected effect: caveat appears at most once per call; opener sounds less
+  scripted/forgetful.
+expected_outcome:
+  metric: driving_caveat_repeat_rate
+  direction: down
+  magnitude: large
+  verify_after_n_calls: 10
+before: |
+  The background fact that we texted this prospect is NOT the trigger ...
+  use the default.
+
+  **Then, in the SAME utterance, append the follow-up that matches what
+  they gave you. ...**
+after: |
+  The background fact that we texted this prospect is NOT the trigger ...
+  use the default.
+
+  **The driving caveat is a one-time line.** "I'm just driving right now
+  so I might cut out here and there" belongs to this opening utterance
+  only. On any later Step 1 turn — re-asking for the name, or asking how
+  you can help — speak without it.
+
+  **Then, in the SAME utterance, append the follow-up that matches what
+  they gave you. ...**
+word_changes_attempted: false
+deployed: true
+deployed_at: 2026-06-09T18:25
+reference_point: docs/reference-points/2026-06-09-opener-business-advance-driving-harden/
+verify_by: |
+  Pull next 10 inbound Stage 1 calls (or run a multi-turn sim where Step 1
+  spans >1 turn — e.g. greeting-only then name, or name-without-reason).
+  For each, check the transcript:
+  1. The driving caveat ("just driving" / "cut out here and there") appears
+     in at most ONE AI turn.
+  2. When Step 1 runs past one turn (Jon re-asks the name or asks how he
+     can help), that later turn does NOT contain the driving caveat.
+  3. The opening utterance still contains the caveat (rule confines, does
+     not delete).
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""

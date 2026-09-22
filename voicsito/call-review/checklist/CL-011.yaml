@@ -1,0 +1,30 @@
+schema_version: 1
+id: CL-011
+category: tool_call
+severity: high
+status: confirmed
+created: 2026-05-20
+created_from:
+  session: null
+  driving_calls: []
+applies_to:
+  stages: [stage2]
+  biz_type_scope: all
+question: |
+  Was each meaningful discovery answer captured via update_prospect_info
+  within 2 turns?
+why: |
+  Discovery data lost mid-call can't power booking + post-call workflow.
+  Tool latency must not exceed 2 turns.
+how_to_spot_a_fail: |
+  Prospect answer that adds info (employees, current marketing spend,
+  services, etc.) with no update_prospect_info tool call in the next 2 AI
+  turns.
+auto_agent_rubric: |
+  Scan transcript for prospect turns containing numeric or named entities;
+  verify update_prospect_info called within 2 AI turns.
+outcome_correlation:
+  joined_to_ghl: false
+  notes: ""
+retired_reason: ""
+retired_at: ""

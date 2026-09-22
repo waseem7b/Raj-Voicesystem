@@ -1,0 +1,48 @@
+schema_version: 1
+id: CH-2026-08-30-002
+created: 2026-08-30T21:24
+session: 2026-08-30-ashley-emdash-sentence-ends
+driven_by:
+  observations: []
+  checklist_items: [CL-033]
+prompt_file: src/agent/prompts/stage1_reminder.py
+stage: demo_reminder
+section: "Step 3 — four markers moved to the owner's sentence-end positions; comma markers removed; courtesy-answer anchor added"
+prompt_file_sha256_before: "4031926e65dd3598e76f951168f8a09b704b40eb21283027e688171d42c69812"
+prompt_file_sha256_after: "9affad09a859f0847471da19326ad0330298435423e742dab8d6dac6e3dc827e"
+escape_reason: ""
+hypothesis: |
+  The owner specified the exact placement he wants (2026-08-30, verbatim), with
+  the marker at sentence boundaries instead of before commas and four em dashes
+  instead of three. Hypothesis: a marker written AFTER a full stop lands at the
+  START of the next TTS chunk rather than the END of the current one. Vapi
+  splits chunks on `. ! ?`; every previously observed vocalisation
+  ("with John J. P.", "later, V", "Google Meet, like,") occurred at a chunk
+  END. A leading-edge marker is an untested position, and it is the only
+  placement that can produce a beat between sentences at all — the comma
+  position demonstrably cannot.
+
+expected_outcome:
+  metric: "sentence-boundary beats present AND zero vocalised markers"
+  direction: "beats appear between sentences; no invented words at marker positions"
+  magnitude: "all 4 marker positions silent and audible on the reminder call"
+  verify_after_n_calls: 1
+before: |
+  Two markers, both before a comma: 'an hour before the call ———,' and
+  'download anything ———,' / 'Google Meet ———,'. No beat at any sentence end.
+  The courtesy answer carried no marker and was not anchored.
+after: |
+  Four markers at the owner's positions: 'thank you ————.' (before the stop, as he
+  wrote it), and after the full stop in 'with Jon. ————', 'from your phone. ————',
+  'easy to get on. ————'. All comma markers removed. The 'I'm good, thank you'
+  courtesy clause is now an anchor scoped to when they ask.
+word_changes_attempted: false
+deployed: true
+deployed_at: 2026-08-31T04:33
+reference_point: "git tag ashley-pre-emdash-sentence-ends"
+verify_by: "One live reminder call. Pull the gzipped log, compare raw completionText marker positions against the Deepgram assistant-channel finals per CL-033."
+verified:
+  ran: false
+  pass_count: 0
+  fail_count: 0
+  conclusion: ""
