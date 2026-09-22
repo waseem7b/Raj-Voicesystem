@@ -96,6 +96,7 @@ WEBHOOK_FILES=(
   tz_resolver.py
   text_digest.py
   call_archive.py
+  call_ledger.py
   call_summary.py
   stats.py
   telegram_notify.py
