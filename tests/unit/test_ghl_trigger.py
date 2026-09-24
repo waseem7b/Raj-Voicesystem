@@ -837,3 +837,39 @@ def test_every_rebooking_variable_sent_has_a_home_in_the_context_message(client,
     sent = set(create_call.await_args.kwargs["variable_values"])
     missing = {k for k in sent - {"bookedTime"} if "{{" + k + "}}" not in ctx}
     assert not missing, missing
+
+
+def test_reminder_when_is_pre_written_for_the_opener(client, create_call, monkeypatch):
+    """The reminder's opening line is firstMessage, spoken before the model runs,
+    so no prompt gate can repair a hole in it — two live calls (01a0b597,
+    01a0b4d8) said "the call at later today" from exactly that. The webhook must
+    hand Vapi a complete phrase either way, or the braces are read out loud."""
+    tz = "America/New_York"
+
+    def _booking(booked_time):
+        return AsyncMock(return_value={
+            "first_name": "Dana", "contact_id": "c1", "appointment_id": "a1",
+            "booked_time": booked_time, "greeting": "morning",
+            "start_iso": _iso_on(tz, 0), "timezone": tz, "city": "", "state": "",
+        })
+
+    monkeypatch.setattr(ghl_trigger, "_resolve_booking", _booking("three thirty"))
+    post(client, {**BASE, "call_type": "reminder", "appointment_id": "appt-when-1"})
+    assert create_call.await_args.kwargs["variable_values"]["reminderWhen"] == "later today at three thirty"
+
+    monkeypatch.setattr(ghl_trigger, "_resolve_booking", _booking(""))
+    post(client, {**BASE, "call_type": "reminder", "appointment_id": "appt-when-2"})
+    assert create_call.await_args.kwargs["variable_values"]["reminderWhen"] == "later today"
+
+
+def test_reminder_when_is_reminder_only(client, create_call, monkeypatch):
+    """Every variable sent must have a home in the prompt that reads it; the
+    confirmation and rebooking openers never mention it."""
+    tz = "America/New_York"
+    monkeypatch.setattr(ghl_trigger, "_resolve_booking", AsyncMock(return_value={
+        "first_name": "Dana", "contact_id": "c1", "appointment_id": "a1",
+        "booked_time": "three thirty", "greeting": "morning",
+        "start_iso": _iso_on(tz, 1), "timezone": tz, "city": "", "state": "",
+    }))
+    post(client, {**BASE, "call_type": "confirmation", "appointment_id": "appt-when-3"})
+    assert "reminderWhen" not in create_call.await_args.kwargs["variable_values"]

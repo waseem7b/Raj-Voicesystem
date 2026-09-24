@@ -833,6 +833,16 @@ async def _place_call(
         "bookedTime": lookup.get("booked_time", ""),
         "greeting": lookup.get("greeting", ""),
     }
+    # The reminder's opening line is delivered by Vapi as firstMessage, before the
+    # model runs, so no prompt gate can catch an empty time there. Two live calls
+    # said "the call at later today" (01a0b597, 01a0b4d8) from exactly that hole.
+    # Pre-write the whole phrase instead — a line the webhook writes is spoken as
+    # written, a line she assembles is not.
+    if call_type == "reminder":
+        _booked_time = lookup.get("booked_time", "")
+        variable_values["reminderWhen"] = (
+            f"later today at {_booked_time}" if _booked_time else "later today"
+        )
     # Sanitised in text_digest before it gets here: the bodies are written by the
     # prospect and land in the same context window as Ashley's instructions.
     # Always set, even when empty — an unrendered {{recentTexts}} would reach the

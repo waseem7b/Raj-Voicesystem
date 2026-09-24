@@ -101,7 +101,9 @@ def test_rebooking_is_its_own_call_type_not_a_stage2():
 #  ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ———--- #
 def test_confirmation_carries_the_script_anchors():
     p = get_stage_prompt("demo_confirmation", "stage1")
-    assert "I've been texting you" in p
+    # The opener no longer says "I've been texting you" (owner, 2026-09-24), so
+    # the text thread is now a reactive answer rather than part of the greeting.
+    assert "you have been texting them" in p
     assert "still good for tomorrow at {time} with Jon" in p
     assert "Are we still on?" in p
     assert "The team is putting the breakdown of your market together" in p
@@ -119,7 +121,10 @@ def test_confirmation_carries_the_script_anchors():
 #  ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ———--- #
 def test_reminder_carries_the_script_anchors():
     p = get_stage_prompt("demo_reminder", "stage1")
-    assert "quick reminder for the call at {time} later today with Jon" in p
+    # The reminder itself moved into the opener (owner, 2026-09-24), so the
+    # prompt must NOT carry it too — that is the same sentence twice per call.
+    assert "remind you about your call with John {{reminderWhen}}" in first_message("demo_reminder")
+    assert "quick reminder for the call" not in p
     assert "market report all finished and ready to go" in p
     assert "meeting link an hour before the call" in p
     assert "It's going to be on Google Meet" in p
@@ -265,10 +270,10 @@ def test_time_and_greeting_are_variable_sourced(call_type, stage):
     "good afternoon" at 10pm off the UTC clock."""
     p = get_stage_prompt(call_type, stage)
     assert "The only clock time you may ever say out loud is `{{bookedTime}}`" in p
-    # The {{greeting}} word is no longer the model's to choose — Vapi renders it
-    # into the firstMessage. What the prompt must still guarantee is that the
-    # clock time is variable-sourced.
-    assert "{{greeting}}" in first_message(call_type)
+    # The greeting words are no longer the model's to choose — Vapi renders the
+    # opener. What must still hold is that anything per-prospect in it arrives
+    # as a variable rather than being assembled.
+    assert "{{firstName}}" in first_message(call_type)
 
 
 def test_rebooking_times_come_only_from_the_calendar_result():
@@ -281,7 +286,7 @@ def test_rebooking_times_come_only_from_the_calendar_result():
     # And the prospect's own clock (owner, 2026-09-15; call 01a0a622 read today's slot as tomorrow's).
     assert "Today is what currentDay in your call context says." in p
     assert 'A day marked "no openings" has nothing to offer' in p
-    assert "{{greeting}}" in first_message("demo_rebooking")
+    assert "{{firstName}}" in first_message("demo_rebooking")
 
 
 def test_punctuation_and_stutter_rules_present():
@@ -379,14 +384,16 @@ def test_the_greeting_runs_straight_through(call_type, stage):
     # confirm carries exactly one owner-requested beat; see the test below
     assert greeting.count("...") <= 1, f"extra beats in the open: {greeting.strip()}"
     assert "—" not in greeting
-    # The gates that used to police this are gone with the model-spoken greeting.
-    # Vapi renders this string whole, so the guarantee is now the string itself:
-    # no full stops before the final one, nothing to flatten.
-    assert greeting.count(".") <= 2, f"choppy open: {greeting.strip()}"
+    # Vapi renders this string whole and these flows set chunkPlan
+    # punctuationBoundaries to ";" only, so the opener reaches ElevenLabs as ONE
+    # generation however many sentences it has. A ";" would reintroduce the
+    # chunk seam that ate "It's Ashley." -> "It's Ash" (call 01a04fec).
+    assert ";" not in greeting, f"chunk seam in the open: {greeting.strip()}"
 
 
 def test_reminder_greeting_keeps_its_contraction():
-    assert "How've you been?" in first_message("demo_reminder")
+    """Contractions are what keep the line from reading like a form letter."""
+    assert "I'm just calling" in first_message("demo_reminder")
 
 
 @pytest.mark.parametrize("call_type,stage", ASHLEY_FLOWS)
@@ -398,7 +405,6 @@ def test_the_greeting_arrives_pre_filled(call_type, stage):
     dropped, both marks flattened. A pre-filled line has nothing to assemble."""
     greeting = first_message(call_type)
     assert "{{firstName}}" in greeting, greeting.strip()
-    assert "{{greeting}}" in greeting, greeting.strip()
     for slot in ("{Name}", "{morning/afternoon}", "[NAME]"):
         assert slot not in greeting, f"unrendered slot {slot}: {greeting.strip()}"
     # And the prompt must tell her it is already done, so she never says it again.
@@ -433,11 +439,16 @@ def test_the_reaction_leads_the_turn(call_type, anchor):
     they had just told her, which reads as waiting for a turn rather than
     listening. The reaction is now the first thing out of her mouth."""
     p = get_stage_prompt(call_type, "stage1")
-    assert "React first." in p
-    assert "**Gate:** Nothing goes ahead of this." in p
+    assert "react to that first" in p
+    assert "**Gate:** When it does apply, nothing goes ahead of it." in p
     assert f'''"I'm good, thank you. {anchor}" is the wrong way round''' in p
     # and the ordering is spelled out, not left to inference
     assert "the reaction, then your answer, then the next step" in p
+    # The openers ask for twenty seconds rather than how they are, so the
+    # reaction is conditional now: "Glad to hear!" after a bare "sure" answers
+    # a question nobody asked (owner, 2026-09-24).
+    assert f'**Anchor (only when they tell you how they are):** "{anchor}"' in p
+    assert "only when there is something to react to" in p
 
 
 @pytest.mark.parametrize("call_type,stage", ASHLEY_FLOWS)
@@ -840,3 +851,31 @@ def test_push_sends_the_context_as_a_second_system_message():
            / "scripts" / "push_confirm_squad.py").read_text(encoding="utf-8")
     assert 'get_stage_context(*flow["prompt"])' in src
     assert '{"role": "system", "content": get_stage_context(*flow["prompt"])}' in src
+
+
+#  ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ———--- #
+# The prompt's account of the greeting must match the greeting (owner, 2026-09-24)
+#  ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ——— ———--- #
+@pytest.mark.parametrize("call_type,stage", ASHLEY_FLOWS)
+def test_step_two_quotes_the_line_actually_spoken(call_type, stage):
+    """Step 2 tells her what the prospect just heard, and Step 3 reacts to it.
+    When the openers changed and this quote did not, she was told the prospect
+    had been asked "How is everything?" when they had been asked for twenty
+    seconds — so a bare "sure" read as an answer to a question nobody asked.
+    Braces are normalised because the rebook prompt writes {firstName} in prose
+    where the opener carries {{firstName}}."""
+    import re
+
+    prompt = get_stage_prompt(call_type, stage)
+    m = re.search(r'The first thing they heard was "(.*?)"', prompt, re.S)
+    assert m, f"{call_type}: Step 2 no longer quotes the greeting"
+
+    def norm(s: str) -> str:
+        s = re.sub(r"<break[^>]*/>", "", s)
+        return re.sub(r"[{}]", "", s).strip()
+
+    assert norm(m.group(1)) in norm(first_message(call_type)), (
+        f"{call_type}: Step 2 quotes a line she never speaks.\n"
+        f"  prompt says: {m.group(1)}\n"
+        f"  she says   : {first_message(call_type)}"
+    )

@@ -88,7 +88,9 @@ FLOWS = {
         "tools": ["mark_not_interested", "mark_locked_in", "mark_needs_reschedule"],
         # Vapi renders this server-side and hands ElevenLabs one complete string —
         # no model, no chunker — which is what stopped the greeting losing words.
-        "first_message": "<break time=\"1.5s\" />{{firstName}}! good {{greeting}}! It's Ashley from Cloud 7, I've been texting you. How is everything?",
+        # Owner's opener, 2026-09-24. Says she is the AI assistant up front and
+        # asks for 20 seconds instead of "How is everything?".
+        "first_message": "<break time=\"1.5s\" />Hey {{firstName}}, this is Ashley, I'm the AI assistant over at Cloud 7 Agency. I keep the calendar for the team, so this'll take about 20 seconds if thats ok?",
         # ";" never occurs in the script, so splits land on commas rather than on
         # the sentence ends where the break tags sit.
         "voice_overrides": {
@@ -122,7 +124,13 @@ FLOWS = {
         # Owner 2026-08-21: acknowledging the reminder counts as confirming
         # again, tagged `locked-in-reminder` on top of `locked-in`.
         "tools": ["mark_not_interested", "mark_locked_in", "mark_needs_reschedule"],
-        "first_message": "<break time=\"1.5s\" />Hey {{firstName}}, good {{greeting}}! It's Ashley. How've you been?",
+        # Owner's opener, 2026-09-24. Carries the reminder itself, so Step 3 no
+        # longer repeats it. {{reminderWhen}} is pre-written by the webhook as
+        # "later today at ten in the morning", or bare "later today" whenever
+        # booked_time is blank — which ghl_trigger does both when no time is on
+        # file AND when the booking is not today at all. firstMessage runs before
+        # the model, so a prompt gate could never catch an empty time here.
+        "first_message": "<break time=\"1.5s\" />Hey {{firstName}}, this is Ashley, I'm the AI assistant over at Cloud 7 Agency. I'm just calling to remind you about your call with John {{reminderWhen}}. Are you still good for that?",
         "voice_overrides": {
             "chunkPlan": {
                 "enabled": True, "minCharacters": 80, "punctuationBoundaries": [";"],
@@ -157,7 +165,8 @@ FLOWS = {
         "env": "VAPI_ASSISTANT_ID_REBOOKING",
         "tools": ["mark_not_interested", "get_available_slots", "reschedule_video_call"],
         # The owner's rebooking opener (updated script, 2026-09-14).
-        "first_message": "<break time=\"1.5s\" />{{firstName}}, good {{greeting}}! This is Ashley from Cloud 7 Agency. How's the day?",
+        # Owner's opener, 2026-09-24.
+        "first_message": "<break time=\"1.5s\" />Hey {{firstName}}, Ashley here, I'm the AI assistant at Cloud 7 Agency. I just need about 20 seconds of your time, that cool?",
         "voice_overrides": {
             "chunkPlan": {
                 "enabled": True, "minCharacters": 80, "punctuationBoundaries": [";"],
